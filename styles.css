@@ -31,15 +31,6 @@ body {
   cursor: pointer;
 }
 
-.collage-item img {
-  display: block;
-  width: 25vw;
-  max-width: 300px;
-  height: auto;
-  border: 3px solid white;
-  box-shadow: 0 0 15px rgba(255,255,255,0.8);
-}
-
 .collage-item .nombre {
   color: #fff;
   margin-top: 0.5rem;
