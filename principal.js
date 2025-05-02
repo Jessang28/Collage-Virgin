@@ -25,7 +25,7 @@ const container = document.getElementById('collage');
 const descripcionDiv = document.getElementById('descripcion');
 const textoDescripcion = document.getElementById('texto-descripcion');
 
-imagenes.forEach(imagen => {
+imagenes.forEach((imagen, index) => {
   const item = document.createElement('div');
   item.className = 'collage-item';
   item.style.left = `${Math.random() * 80}%`;
@@ -35,23 +35,50 @@ imagenes.forEach(imagen => {
   imgElement.src = imagen.url;
   imgElement.alt = imagen.name;
 
-  const nameElement = document.createElement('div');
-  nameElement.className = 'nombre';
-  nameElement.textContent = imagen.name;
+  const nombre = document.createElement('div');
+  nombre.className = 'nombre';
+  nombre.textContent = imagen.name;
 
   item.appendChild(imgElement);
-  item.appendChild(nameElement);
+  item.appendChild(nombre);
   container.appendChild(item);
 
   item.addEventListener('click', () => {
-    textoDescripcion.textContent = imagen.descripcion;
+    textoDescripcion.innerHTML = `
+      <p>${imagen.descripcion}</p>
+      <div class="comentario-container">
+        <span class="comentario-link" onclick="mostrarFormulario(${index})">TE PIDO, TE RUEGO VIRGENCITA</span>
+        <div id="formulario-${index}" class="formulario-comentario">
+          <textarea placeholder="Escribe tu comentario..."></textarea><br/>
+          <button class="enviar-comentario" onclick="enviarComentario(${index})">Enviar</button>
+          <div id="audio-${index}" class="audio-consejo"></div>
+        </div>
+      </div>
+    `;
     descripcionDiv.style.display = 'flex';
   });
 });
 
-descripcionDiv.addEventListener('click', () => {
-  descripcionDiv.style.display = 'none';
-});
+function mostrarFormulario(index) {
+  const formulario = document.getElementById(`formulario-${index}`);
+  formulario.style.display = 'block';
+}
 
+function enviarComentario(index) {
+  const formulario = document.getElementById(`formulario-${index}`);
+  const textarea = formulario.querySelector('textarea');
+  const comentario = textarea.value.trim();
 
-
+  if (comentario) {
+    // Aquí se podría guardar el comentario si fuera necesario
+    const audioContainer = document.getElementById(`audio-${index}`);
+    audioContainer.innerHTML = `
+      <p>La virgencita te deja este consejo:</p>
+      <audio controls>
+        <source src="audios/virgen${index + 1}.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+    `;
+    textarea.value = '';
+  }
+}
