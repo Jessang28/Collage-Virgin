@@ -27,8 +27,8 @@ const descripcionContainer = document.getElementById('descripcion');
 imagenes.forEach(imagen => {
   const item = document.createElement('div');
   item.className = 'collage-item';
-  item.style.left = `${Math.random() * 90}%`;
-  item.style.top = `${Math.random() * 90}%`;
+  item.style.left = `${Math.random() * 70}%`;
+  item.style.top = `${Math.random() * 70}%`;
 
   const imgElement = document.createElement('img');
   imgElement.src = imagen.url;
@@ -47,7 +47,8 @@ imagenes.forEach(imagen => {
     const descripcionText = imagen.descripcion.split(' ').map(word => {
       const span = document.createElement('span');
       span.textContent = word;
-      span.style.fontFamily = `"${['Arial', 'Georgia', 'Times New Roman', 'Courier New'][Math.floor(Math.random() * 4)]}"`;
+      const fonts = ['Arial', 'Georgia', 'Times New Roman', 'Courier New'];
+      span.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
       span.style.fontSize = `${Math.floor(Math.random() * 40) + 20}px`;
       span.style.color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
       return span;
@@ -62,3 +63,4 @@ imagenes.forEach(imagen => {
 document.querySelector('.close').addEventListener('click', () => {
   descripcionContainer.style.display = 'none';
 });
+
