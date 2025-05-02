@@ -35,18 +35,18 @@ body {
 
 .collage-item img {
   display: block;
-  max-width: 150px;
+  max-width: 250px; /* Aumenté el tamaño de las imágenes */
   margin-bottom: 0.5rem;
 }
 
 .collage-item .nombre {
   color: #fafafa;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-shadow: 1px 1px 2px #000;
 }
 
 .collage-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.2); /* Hice el hover más grande */
   z-index: 999;
 }
 
@@ -95,6 +95,5 @@ body {
 #descripcion span {
   animation: textAnimation 0.5s ease-in-out forwards;
 }
-
 
 
