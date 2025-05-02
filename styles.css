@@ -1,10 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('img/fondo.jpg') center/cover no-repeat;
   height: 100vh;
   overflow: hidden;
   font-family: 'MedievalSharp', cursive;
+  position: relative;
 }
 
 .contenedor-collage {
