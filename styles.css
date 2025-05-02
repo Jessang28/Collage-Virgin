@@ -7,6 +7,16 @@ body {
   position: relative;
 }
 
+.video-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
 .contenedor-collage {
   position: relative;
   width: 100%;
@@ -20,6 +30,7 @@ body {
   text-align: center;
   transition: transform 0.3s ease;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  cursor: pointer;
 }
 
 .collage-item img {
@@ -35,8 +46,55 @@ body {
 }
 
 .collage-item:hover {
-  transform: scale(1.1) rotate(0deg);
+  transform: scale(1.1);
   z-index: 999;
 }
+
+#descripcion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 2rem;
+  text-align: center;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#descripcion p {
+  font-size: 2rem;
+  margin: 10px 0;
+  font-family: 'Arial', sans-serif;
+}
+
+#descripcion .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  background: rgba(255, 0, 0, 0.6);
+  padding: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes textAnimation {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#descripcion span {
+  animation: textAnimation 0.5s ease-in-out forwards;
+}
+
 
 
