@@ -70,74 +70,15 @@ function enviarComentario(index) {
   const comentario = textarea.value.trim();
 
   if (comentario) {
-    // Aquí se podría guardar el comentario si fuera necesario
     const audioContainer = document.getElementById(`audio-${index}`);
     audioContainer.innerHTML = `
       <p>La virgencita te deja este consejo:</p>
-      <audio controls>
-        <source src="audios/virgen${index + 1}.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-      </audio>
+      <video controls width="100%">
+        <source src="audios/virgen${index + 1}.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     `;
     textarea.value = '';
   }
-}const imagenes = [
-  { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
-  { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
-  // ... otras vírgenes ...
-];
-
-let indiceActual = 0;
-
-function mostrarFormulario() {
-  document.getElementById("formulario-comentario").style.display = "block";
 }
-
-function enviarComentario() {
-  const comentario = document.getElementById("comentario-texto").value.trim();
-  if (comentario) {
-    reproducirAudioVirgen(indiceActual + 1);
-    document.getElementById("comentario-texto").value = '';
-    document.getElementById("formulario-comentario").style.display = "none";
-    alert("Tu comentario secreto ha sido guardado. 🌙"); // Solo lo ve quien escribe
-  }
-}
-
-function reproducirAudioVirgen(indice) {
-  const audio = new Audio(`audio/virgen${indice}.mp4`);
-  audio.play();
-}
-
-window.onload = function() {
-  const collage = document.getElementById("collage");
-
-  imagenes.forEach((imagen, index) => {
-    const div = document.createElement("div");
-    div.classList.add("collage-item");
-
-    const img = document.createElement("img");
-    img.src = imagen.url;
-    img.alt = imagen.name;
-    img.style.width = "150px";
-
-    const nombre = document.createElement("div");
-    nombre.className = "nombre";
-    nombre.textContent = imagen.name;
-
-    div.appendChild(img);
-    div.appendChild(nombre);
-
-    // Posicionamiento aleatorio
-    div.style.top = Math.random() * 80 + "vh";
-    div.style.left = Math.random() * 80 + "vw";
-
-    div.addEventListener("click", () => {
-      document.getElementById("descripcion").style.display = "flex";
-      document.getElementById("texto-descripcion").textContent = imagen.descripcion;
-      indiceActual = index;
-    });
-
-    collage.appendChild(div);
-  });
-};
 
