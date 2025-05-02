@@ -67,5 +67,46 @@ body {
   100% { font-family: 'Verdana', sans-serif; }
 }
 
+.comentario-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.comentario-link {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #FFD700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.formulario-comentario {
+  display: none;
+  margin-top: 1rem;
+}
+
+textarea {
+  width: 80%;
+  height: 100px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  padding: 10px;
+  resize: none;
+}
+
+button.enviar-comentario {
+  margin-top: 0.5rem;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #FFD700;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.audio-consejo {
+  margin-top: 1rem;
+}
 
 
