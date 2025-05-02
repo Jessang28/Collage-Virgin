@@ -5,13 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collage de Vírgenes</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: url('img/fondo.png') center/cover no-repeat;
-      height: 100vh;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       overflow: hidden;
       font-family: 'MedievalSharp', cursive;
+    }
+
+    #video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
     }
 
     .contenedor-collage {
@@ -29,22 +42,40 @@
       font-family: 'UnifrakturCook', serif;
     }
 
- .collage-item .nombre {
+    .collage-item .nombre {
       color: #fafafa;
       font-size: 1rem;
       text-shadow: 1px 1px 2px #000;
     }
 
     .collage-item:hover {
-      transform: scale(1.1) rotate(0deg);
+      transform: scale(1.1);
       z-index: 999;
+    }
+
+    .collage-item img {
+      max-width: 150px;
+      height: auto;
     }
   </style>
 </head>
 <body>
+
+  <!-- Video de fondo -->
+  <video id="video-fondo" autoplay loop muted>
+    <source id="fuente-video" src="" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
   <div class="contenedor-collage" id="collage"></div>
 
   <script>
+    // Elegir aleatoriamente uno de los videos
+    const videos = ['video/video1.mp4', 'video/video2.mp4'];
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+    document.getElementById('fuente-video').src = randomVideo;
+    document.getElementById('video-fondo').load();
+
     const imagenes = [
       { name: "Virgen de Guadalupe", url: "img/virgen1.png" },
       { name: "Virgen María", url: "img/virgen2.png" },
@@ -66,29 +97,4 @@
       { name: "Virgen de la Paz", url: "img/virgen18.png" },
       { name: "Virgen del Pilar", url: "img/virgen19.png" },
       { name: "Virgen de las Mercedes", url: "img/virgen20.png" }
-    ];
-
-    const container = document.getElementById('collage');
-
-    imagenes.forEach(imagen => {
-      const item = document.createElement('div');
-      item.className = 'collage-item';
-      item.style.left = `${Math.random() * 90}%`;
-      item.style.top = `${Math.random() * 90}%`;
-
-      const imgElement = document.createElement('img');
-      imgElement.src = imagen.url;
-      imgElement.alt = imagen.name;
-
-      const nameElement = document.createElement('div');
-      nameElement.className = 'nombre';
-      nameElement.textContent = imagen.name;
-
-      item.appendChild(imgElement);
-      item.appendChild(nameElement);
-      container.appendChild(item);
-    });
-  </script>
-</body>
-</html>
 
