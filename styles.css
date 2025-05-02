@@ -1,7 +1,9 @@
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  position: relative;
   background-color: black;
 }
 
@@ -12,83 +14,77 @@ body {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  z-index: -1;
-  opacity: 0.3;
+  z-index: -2;
 }
 
 .contenedor-collage {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.collage-container {
-  position: relative;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 
-.image-container {
+.collage-item {
   position: absolute;
+  padding: 0.5rem;
   transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-.image-container:hover {
-  transform: scale(1.2);
-  z-index: 2;
-}
-
-.image-container img {
-  width: 250px; /* AUMENTÉ este valor para que sean más grandes */
-  height: auto;
+.collage-item img {
   display: block;
-  border-radius: 8px;
-  border: 2px solid white;
+  width: 25vw;
+  max-width: 300px;
+  height: auto;
+  border: 3px solid white;
+  box-shadow: 0 0 15px rgba(255,255,255,0.8);
 }
 
-.image-container p {
-  position: absolute;
-  bottom: -2.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px black;
+.collage-item .nombre {
+  color: #fff;
+  margin-top: 0.5rem;
   text-align: center;
-  white-space: nowrap;
-}
-
-#descripcion {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  z-index: 3;
-  display: none;
-}
-
-button.close {
-  position: absolute;
-  top: 0.2rem;
-  right: 0.5rem;
-  background: transparent;
-  color: white;
-  border: none;
   font-size: 1.2rem;
-  cursor: pointer;
+  text-shadow: 2px 2px 4px #000;
 }
 
-
-#descripcion span {
-  animation: textAnimation 0.5s ease-in-out forwards;
+.collage-item:hover {
+  transform: scale(1.2);
+  z-index: 10;
 }
+
+.descripcion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.descripcion-texto {
+  width: 90%;
+  font-size: 2.5rem;
+  line-height: 1.7;
+  text-align: center;
+  word-break: break-word;
+  animation: cambiarFuente 3s infinite alternate;
+}
+
+@keyframes cambiarFuente {
+  0% { font-family: 'Georgia', serif; }
+  25% { font-family: 'Courier New', monospace; }
+  50% { font-family: 'Impact', fantasy; }
+  75% { font-family: 'Lucida Console', monospace; }
+  100% { font-family: 'Verdana', sans-serif; }
+}
+
 
 
