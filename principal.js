@@ -73,12 +73,13 @@ function enviarComentario(index) {
     const audioContainer = document.getElementById(`audio-${index}`);
     audioContainer.innerHTML = `
       <p>La virgencita te deja este consejo:</p>
-      <video controls width="100%">
-        <source src="audios/virgen${index + 1}.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
+      <audio controls>
+        <source src="audio/virgen${index + 1}.mp4" type="audio/mp4">
+        Tu navegador no soporta el elemento de audio.
+      </audio>
     `;
     textarea.value = '';
   }
 }
+
 
