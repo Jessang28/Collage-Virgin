@@ -1,10 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #2e1f27; /* tono oscuro cálido, tipo vino tinto */
+  background: url('img/fondo.jpg') center/cover no-repeat;
   height: 100vh;
   overflow: hidden;
-  font-family: serif;
+  font-family: 'MedievalSharp', cursive;
 }
 
 .contenedor-collage {
