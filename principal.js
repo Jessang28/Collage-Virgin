@@ -1,56 +1,57 @@
-const virgenes = [
-  { nombre: "Virgen de Guadalupe", imagen: "img/virgen1.png", descripcion: "Patrona de México." },
-  { nombre: "Virgen del Carmen", imagen: "img/virgen2.png", descripcion: "Protectora de los marineros." },
-  { nombre: "Virgen de Fátima", imagen: "img/virgen3.png", descripcion: "Apareció en Portugal." },
-  { nombre: "Virgen de la Candelaria", imagen: "img/virgen4.png", descripcion: "Celebrada con danzas." },
-  { nombre: "Virgen del Rosario", imagen: "img/virgen5.png", descripcion: "Símbolo de oración constante." },
-  { nombre: "Virgen de los Dolores", imagen: "img/virgen6.png", descripcion: "Dolor maternal y compasión." },
-  { nombre: "Virgen de la Merced", imagen: "img/virgen7.png", descripcion: "Liberadora de cautivos." },
-  { nombre: "Virgen de Chiquinquirá", imagen: "img/virgen8.png", descripcion: "Patrona de Colombia." }
+const imagenes = [
+  { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
+  { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
+  { name: "Virgen de Fátima", url: "img/virgen3.png", descripcion: "La Virgen de Fátima apareció en 1917 en Portugal a tres niños pastores, transmitiendo mensajes de paz, penitencia y esperanza." },
+  { name: "Virgen de Luján", url: "img/virgen4.png", descripcion: "La Virgen de Luján es una de las principales advocaciones marianas de Argentina, símbolo de protección y fe para los creyentes de ese país." },
+  { name: "Virgen de Czestochowa", url: "img/virgen5.png", descripcion: "La Virgen de Czestochowa, conocida como la 'Madonna Negra', es una de las imágenes más veneradas en Polonia, famosa por su milagrosa protección." },
+  { name: "Virgen de Lourdes", url: "img/virgen6.png", descripcion: "La Virgen de Lourdes, quien apareció en 1858 en Francia a Bernadette Soubirous, es conocida por los milagros de sanación que se le atribuyen." },
+  { name: "Virgen de la Caridad", url: "img/virgen7.png", descripcion: "La Virgen de la Caridad del Cobre es la patrona de Cuba, símbolo de unidad, fe y esperanza para los cubanos." },
+  { name: "Virgen del Carmen", url: "img/virgen8.png", descripcion: "La Virgen del Carmen es una de las advocaciones marianas más veneradas, especialmente entre los marineros, como protectora y guía espiritual." },
+  { name: "Virgen de Montserrat", url: "img/virgen9.png", descripcion: "La Virgen de Montserrat es una imagen venerada en Cataluña, España. Es conocida por su fuerza espiritual y protección." },
+  { name: "Virgen de la Medalla Milagrosa", url: "img/virgen10.png", descripcion: "La Virgen de la Medalla Milagrosa es una imagen que se asocia con la protección divina y la fe, conocida por los milagros que se dice han ocurrido gracias a ella." },
+  { name: "Virgen de la Sagrada Familia", url: "img/virgen11.png", descripcion: "La Virgen de la Sagrada Familia refleja la unidad y amor en la familia, promoviendo la paz y la armonía en los hogares." },
+  { name: "Virgen de la Nube", url: "img/virgen12.png", descripcion: "La Virgen de la Nube es una advocación menos conocida pero igualmente importante, simbolizando la protección y la esperanza en tiempos de adversidad." },
+  { name: "Virgen de la Anunciación", url: "img/virgen13.png", descripcion: "La Virgen de la Anunciación se celebra como el momento en que María recibió el mensaje de Dios, un símbolo de fe y obediencia." },
+  { name: "Virgen de los Remedios", url: "img/virgen14.png", descripcion: "La Virgen de los Remedios es invocada como la protectora en momentos de enfermedad y dolor, brindando consuelo a los afligidos." },
+  { name: "Virgen de la Misericordia", url: "img/virgen15.png", descripcion: "La Virgen de la Misericordia es conocida por su capacidad de interceder ante Dios y otorgar perdón y sanación." },
+  { name: "Virgen de Guadalupe de Extremadura", url: "img/virgen16.png", descripcion: "La Virgen de Guadalupe de Extremadura es una de las variantes de la Virgen Guadalupe, venerada en España y asociada a la paz y la esperanza." },
+  { name: "Virgen de la Esperanza", url: "img/virgen17.png", descripcion: "La Virgen de la Esperanza es un símbolo de la luz que llega en medio de la oscuridad, otorgando fuerza a quienes la invocan." },
+  { name: "Virgen de la Paz", url: "img/virgen18.png", descripcion: "La Virgen de la Paz es venerada en Venezuela, siendo la patrona de la paz, la reconciliación y la unidad entre los pueblos." },
+  { name: "Virgen del Pilar", url: "img/virgen19.png", descripcion: "La Virgen del Pilar es una de las imágenes más veneradas en Zaragoza, España, y es considerada la madre de la iglesia en ese país." },
+  { name: "Virgen de las Mercedes", url: "img/virgen20.png", descripcion: "La Virgen de las Mercedes es conocida por ser la protectora de los cautivos y la liberación espiritual." }
 ];
 
-const fuentes = [
-  "Georgia, serif",
-  "'Courier New', monospace",
-  "'Lucida Console', monospace",
-  "'Comic Sans MS', cursive, sans-serif",
-  "'Brush Script MT', cursive",
-  "'Times New Roman', Times, serif",
-  "'Impact', Charcoal, sans-serif"
-];
+const container = document.getElementById('collage');
+const descripcionDiv = document.getElementById('descripcion');
+const textoDescripcion = document.getElementById('texto-descripcion');
 
-const collage = document.getElementById("collage");
-const descripcion = document.getElementById("descripcion");
-const descripcionTexto = descripcion.querySelector("p");
-const closeBtn = document.querySelector(".close");
+imagenes.forEach(imagen => {
+  const item = document.createElement('div');
+  item.className = 'collage-item';
+  item.style.left = `${Math.random() * 80}%`;
+  item.style.top = `${Math.random() * 80}%`;
 
-virgenes.forEach((virgen, i) => {
-  const div = document.createElement("div");
-  div.className = "image-container";
-  div.style.left = Math.random() * 90 + "vw";
-  div.style.top = Math.random() * 80 + "vh";
+  const imgElement = document.createElement('img');
+  imgElement.src = imagen.url;
+  imgElement.alt = imagen.name;
 
-  const img = document.createElement("img");
-  img.src = virgen.imagen;
-  img.alt = virgen.nombre;
+  const nameElement = document.createElement('div');
+  nameElement.className = 'nombre';
+  nameElement.textContent = imagen.name;
 
-  const texto = document.createElement("p");
-  texto.textContent = virgen.nombre;
-  texto.style.fontFamily = fuentes[Math.floor(Math.random() * fuentes.length)];
+  item.appendChild(imgElement);
+  item.appendChild(nameElement);
+  container.appendChild(item);
 
-  div.appendChild(img);
-  div.appendChild(texto);
-
-  div.addEventListener("click", () => {
-    descripcion.style.display = "block";
-    descripcionTexto.textContent = virgen.descripcion;
+  item.addEventListener('click', () => {
+    textoDescripcion.textContent = imagen.descripcion;
+    descripcionDiv.style.display = 'flex';
   });
-
-  collage.appendChild(div);
 });
 
-closeBtn.addEventListener("click", () => {
-  descripcion.style.display = "none";
+descripcionDiv.addEventListener('click', () => {
+  descripcionDiv.style.display = 'none';
 });
+
 
 
