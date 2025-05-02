@@ -62,24 +62,22 @@ imagenes.forEach((imagen, index) => {
 function mostrarFormulario(index) {
   const formulario = document.getElementById(`formulario-${index}`);
   formulario.style.display = 'block';
+
+  const audioContainer = document.getElementById(`audio-${index}`);
+
+  // Detener cualquier otro audio sonando
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  // Reproducir el audio correspondiente automáticamente
+  audioContainer.innerHTML = `
+    <p>La virgencita te deja este consejo:</p>
+    <audio controls autoplay>
+      <source src="audio/virgen${index + 1}.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  `;
 }
-
-function enviarComentario(index) {
-  const formulario = document.getElementById(`formulario-${index}`);
-  const textarea = formulario.querySelector('textarea');
-  const comentario = textarea.value.trim();
-
-  if (comentario) {
-    const audioContainer = document.getElementById(`audio-${index}`);
-    audioContainer.innerHTML = `
-      <p>La virgencita te deja este consejo:</p>
-      <audio controls>
-        <source src="audio/virgen${index + 1}.mp4" type="audio/mp4">
-        Tu navegador no soporta el elemento de audio.
-      </audio>
-    `;
-    textarea.value = '';
-  }
-}
-
-
