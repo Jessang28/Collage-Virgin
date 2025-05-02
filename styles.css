@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('https://i.imgur.com/OE5z6qK.jpg') center/cover no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'MedievalSharp', cursive;
+}
+
+.contenedor-collage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.collage-item {
+  position: absolute;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  border: 5px solid rgba(255,255,255,0.8);
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+  font-family: 'UnifrakturCook', serif;
+}
+
+.collage-item img {
+  display: block;
+  max-width: 150px;
+  margin-bottom: 0.5rem;
+}
+
+.collage-item .nombre {
+  color: #fafafa;
+  font-size: 1rem;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.collage-item:hover {
+  transform: scale(1.1) rotate(0deg);
+  z-index: 999;
+}
