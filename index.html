@@ -1,21 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collage de Vírgenes</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://i.imgur.com/OE5z6qK.jpg') center/cover no-repeat;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'MedievalSharp', cursive;
+    }
 
-  <!-- Fuentes medievales -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    .contenedor-collage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
 
-  <!-- Tu CSS -->
-  <link rel="stylesheet" href="css/estilo.css">
+    .collage-item {
+      position: absolute;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      border: 5px solid rgba(255,255,255,0.8);
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      font-family: 'UnifrakturCook', serif;
+    }
+
+    .collage-item img {
+      display: block;
+      max-width: 150px;
+      margin-bottom: 0.5rem;
+    }
+
+    .collage-item .nombre {
+      color: #fafafa;
+      font-size: 1rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .collage-item:hover {
+      transform: scale(1.1) rotate(0deg);
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
   <div class="contenedor-collage" id="collage"></div>
 
-  <!-- Tu JavaScript -->
-  <script src="js/principal.js"></script>
+  <script>
+    const imagenes = [
+      { name: "Virgen de Guadalupe", url: "img/virgen1.jpg" },
+      { name: "Virgen María", url: "img/virgen2.jpg" },
+      { name: "Virgen de Fátima", url: "img/virgen3.jpg" },
+      { name: "Virgen de Luján", url: "img/virgen4.jpg" },
+      { name: "Virgen de Czestochowa", url: "img/virgen5.jpg" },
+      { name: "Virgen de Lourdes", url: "img/virgen6.jpg" },
+      { name: "Virgen de la Caridad", url: "img/virgen7.jpg" },
+      { name: "Virgen del Carmen", url: "img/virgen8.jpg" },
+      { name: "Virgen de Montserrat", url: "img/virgen9.jpg" },
+      { name: "Virgen de la Medalla Milagrosa", url: "img/virgen10.jpg" },
+      { name: "Virgen de la Sagrada Familia", url: "img/virgen11.jpg" },
+      { name: "Virgen de la Nube", url: "img/virgen12.jpg" },
+      { name: "Virgen de la Anunciación", url: "img/virgen13.jpg" },
+      { name: "Virgen de los Remedios", url: "img/virgen14.jpg" },
+      { name: "Virgen de la Misericordia", url: "img/virgen15.jpg" },
+      { name: "Virgen de Guadalupe de Extremadura", url: "img/virgen16.jpg" },
+      { name: "Virgen de la Esperanza", url: "img/virgen17.jpg" },
+      { name: "Virgen de la Paz", url: "img/virgen18.jpg" },
+      { name: "Virgen del Pilar", url: "img/virgen19.jpg" },
+      { name: "Virgen de las Mercedes", url: "img/virgen20.jpg" }
+    ];
+
+    const container = document.getElementById('collage');
+
+    imagenes.forEach(imagen => {
+      const item = document.createElement('div');
+      item.className = 'collage-item';
+      item.style.left = `${Math.random() * 90}%`;
+      item.style.top = `${Math.random() * 90}%`;
+
+      const imgElement = document.createElement('img');
+      imgElement.src = imagen.url;
+      imgElement.alt = imagen.name;
+
+      const nameElement = document.createElement('div');
+      nameElement.className = 'nombre';
+      nameElement.textContent = imagen.name;
+
+      item.appendChild(imgElement);
+      item.appendChild(nameElement);
+      container.appendChild(item);
+    });
+  </script>
 </body>
 </html>
