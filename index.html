@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -40,6 +41,12 @@
       font-family: 'UnifrakturCook', serif;
     }
 
+    .collage-item img {
+      display: block;
+      max-width: 150px;
+      margin-bottom: 0.5rem;
+    }
+
     .collage-item .nombre {
       color: #fafafa;
       font-size: 1rem;
@@ -50,6 +57,32 @@
       transform: scale(1.1);
       z-index: 999;
     }
+
+    /* Estilos para la descripción */
+    .descripcion {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .descripcion-texto {
+      font-size: 2rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+      width: 80%;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -62,28 +95,33 @@
 
   <div class="contenedor-collage" id="collage"></div>
 
+  <!-- Contenedor de la descripción -->
+  <div id="descripcion" class="descripcion">
+    <div class="descripcion-texto" id="texto-descripcion"></div>
+  </div>
+
   <script>
     const imagenes = [
-      { name: "Virgen de Guadalupe", url: "img/virgen1.png" },
-      { name: "Virgen María", url: "img/virgen2.png" },
-      { name: "Virgen de Fátima", url: "img/virgen3.png" },
-      { name: "Virgen de Luján", url: "img/virgen4.png" },
-      { name: "Virgen de Czestochowa", url: "img/virgen5.png" },
-      { name: "Virgen de Lourdes", url: "img/virgen6.png" },
-      { name: "Virgen de la Caridad", url: "img/virgen7.png" },
-      { name: "Virgen del Carmen", url: "img/virgen8.png" },
-      { name: "Virgen de Montserrat", url: "img/virgen9.png" },
-      { name: "Virgen de la Medalla Milagrosa", url: "img/virgen10.png" },
-      { name: "Virgen de la Sagrada Familia", url: "img/virgen11.png" },
-      { name: "Virgen de la Nube", url: "img/virgen12.png" },
-      { name: "Virgen de la Anunciación", url: "img/virgen13.png" },
-      { name: "Virgen de los Remedios", url: "img/virgen14.png" },
-      { name: "Virgen de la Misericordia", url: "img/virgen15.png" },
-      { name: "Virgen de Guadalupe de Extremadura", url: "img/virgen16.png" },
-      { name: "Virgen de la Esperanza", url: "img/virgen17.png" },
-      { name: "Virgen de la Paz", url: "img/virgen18.png" },
-      { name: "Virgen del Pilar", url: "img/virgen19.png" },
-      { name: "Virgen de las Mercedes", url: "img/virgen20.png" }
+      { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
+      { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
+      { name: "Virgen de Fátima", url: "img/virgen3.png", descripcion: "La Virgen de Fátima apareció en 1917 en Portugal a tres niños pastores, transmitiendo mensajes de paz, penitencia y esperanza." },
+      { name: "Virgen de Luján", url: "img/virgen4.png", descripcion: "La Virgen de Luján es una de las principales advocaciones marianas de Argentina, símbolo de protección y fe para los creyentes de ese país." },
+      { name: "Virgen de Czestochowa", url: "img/virgen5.png", descripcion: "La Virgen de Czestochowa, conocida como la 'Madonna Negra', es una de las imágenes más veneradas en Polonia, famosa por su milagrosa protección." },
+      { name: "Virgen de Lourdes", url: "img/virgen6.png", descripcion: "La Virgen de Lourdes, quien apareció en 1858 en Francia a Bernadette Soubirous, es conocida por los milagros de sanación que se le atribuyen." },
+      { name: "Virgen de la Caridad", url: "img/virgen7.png", descripcion: "La Virgen de la Caridad del Cobre es la patrona de Cuba, símbolo de unidad, fe y esperanza para los cubanos." },
+      { name: "Virgen del Carmen", url: "img/virgen8.png", descripcion: "La Virgen del Carmen es una de las advocaciones marianas más veneradas, especialmente entre los marineros, como protectora y guía espiritual." },
+      { name: "Virgen de Montserrat", url: "img/virgen9.png", descripcion: "La Virgen de Montserrat es una imagen venerada en Cataluña, España. Es conocida por su fuerza espiritual y protección." },
+      { name: "Virgen de la Medalla Milagrosa", url: "img/virgen10.png", descripcion: "La Virgen de la Medalla Milagrosa es una imagen que se asocia con la protección divina y la fe, conocida por los milagros que se dice han ocurrido gracias a ella." },
+      { name: "Virgen de la Sagrada Familia", url: "img/virgen11.png", descripcion: "La Virgen de la Sagrada Familia refleja la unidad y amor en la familia, promoviendo la paz y la armonía en los hogares." },
+      { name: "Virgen de la Nube", url: "img/virgen12.png", descripcion: "La Virgen de la Nube es una advocación menos conocida pero igualmente importante, simbolizando la protección y la esperanza en tiempos de adversidad." },
+      { name: "Virgen de la Anunciación", url: "img/virgen13.png", descripcion: "La Virgen de la Anunciación se celebra como el momento en que María recibió el mensaje de Dios, un símbolo de fe y obediencia." },
+      { name: "Virgen de los Remedios", url: "img/virgen14.png", descripcion: "La Virgen de los Remedios es invocada como la protectora en momentos de enfermedad y dolor, brindando consuelo a los afligidos." },
+      { name: "Virgen de la Misericordia", url: "img/virgen15.png", descripcion: "La Virgen de la Misericordia es conocida por su capacidad de interceder ante Dios y otorgar perdón y sanación." },
+      { name: "Virgen de Guadalupe de Extremadura", url: "img/virgen16.png", descripcion: "La Virgen de Guadalupe de Extremadura es una de las variantes de la Virgen Guadalupe, venerada en España y asociada a la paz y la esperanza." },
+      { name: "Virgen de la Esperanza", url: "img/virgen17.png", descripcion: "La Virgen de la Esperanza es un símbolo de la luz que llega en medio de la oscuridad, otorgando fuerza a quienes la invocan." },
+      { name: "Virgen de la Paz", url: "img/virgen18.png", descripcion: "La Virgen de la Paz es venerada en Venezuela, siendo la patrona de la paz, la reconciliación y la unidad entre los pueblos." },
+      { name: "Virgen del Pilar", url: "img/virgen19.png", descripcion: "La Virgen del Pilar es una de las imágenes más veneradas en Zaragoza, España, y es considerada la madre de la iglesia en ese país." },
+      { name: "Virgen de las Mercedes", url: "img/virgen20.png", descripcion: "La Virgen de las Mercedes es conocida por ser la protectora de los cautivos y la liberación espiritual." }
     ];
 
     const container = document.getElementById('collage');
@@ -102,10 +140,28 @@
       nameElement.className = 'nombre';
       nameElement.textContent = imagen.name;
 
+      // Agregar evento para mostrar la descripción
+      item.addEventListener('click', () => {
+        const descripcionDiv = document.getElementById('descripcion');
+        const textoDescripcion = document.getElementById('texto-descripcion');
+
+        // Cambiar el contenido de la descripción
+        textoDescripcion.textContent = imagen.descripcion;
+
+        // Mostrar la descripción
+        descripcionDiv.style.display = 'flex';
+      });
+
       item.appendChild(imgElement);
       item.appendChild(nameElement);
       container.appendChild(item);
     });
+
+    // Cerrar la descripción al hacer clic fuera
+    document.getElementById('descripcion').addEventListener('click', () => {
+      document.getElementById('descripcion').style.display = 'none';
+    });
   </script>
+
 </body>
 </html>
