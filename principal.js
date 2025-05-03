@@ -79,5 +79,14 @@ function mostrarFormulario(index) {
       <source src="audio/virgen${index + 1}.mp3" type="audio/mpeg">
       Tu navegador no soporta el elemento de audio.
     </audio>
-  `;
+  <br/>
+  <button onclick="volverAPrincipal()" style="margin-top: 10px;">Volver</button>
+`;
+function volverAPrincipal() {
+  const descripcionDiv = document.getElementById('descripcion');
+  descripcionDiv.style.display = 'none';
+  descripcionDiv.innerHTML = '';
+
+  const galeria = document.getElementById('galeria');
+  galeria.style.display = 'grid'; // O el display que uses para mostrar las virgencitas
 }
