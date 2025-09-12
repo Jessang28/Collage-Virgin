@@ -71,27 +71,38 @@ function enviarComentario(index) {
   }
 
 
-  // --- Reproducción aleatoria de los 4 audios de fondo ---
-const audiosFondo = [
-  "audio/audiofondo1.mp3",
-  "audio/audiofondo2.mp3",
-  "audio/audiofondo3.mp3",
-  "audio/audiofondo4.mp3"
+ const audiosFondo = [
+  "AUDIO/audiofondo1.mp3",
+  "AUDIO/audiofondo2.mp3",
+  "AUDIO/audiofondo3.mp3",
+  "AUDIO/audiofondo4.mp3"
 ];
 
-// usamos el <audio> del HTML
-const audioFondo = document.getElementById("audio-fondo");
+const audioFondo = new Audio();
 audioFondo.volume = 0.5; // volumen moderado
 
 function reproducirAleatorio() {
-  // elegir un audio aleatorio de la lista
   const indice = Math.floor(Math.random() * audiosFondo.length);
   audioFondo.src = audiosFondo[indice];
-  audioFondo.play();
+  audioFondo.play().catch(err => {
+    console.log("Error al reproducir audio:", err);
+  });
 }
 
-// cuando termine un audio, pasa a otro aleatorio
+// Cuando termina un audio, pasa a otro aleatorio
 audioFondo.addEventListener("ended", reproducirAleatorio);
 
-// inicia la reproducción al cargar la página
-window.addEventListener("load", reproducirAleatorio);
+// Variable para que solo se active una vez
+let audioIniciado = false;
+
+function iniciarAudio() {
+  if (!audioIniciado) {
+    audioIniciado = true;
+    reproducirAleatorio();
+  }
+}
+
+// Escuchar interacciones del usuario
+window.addEventListener("scroll", iniciarAudio, { once: true });
+window.addEventListener("click", iniciarAudio, { once: true });
+window.addEventListener("touchstart", iniciarAudio, { once: true });
