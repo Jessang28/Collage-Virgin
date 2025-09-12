@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collage de Vírgenes</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página con Audio de Fondo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #000;
+      color: white;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Bienvenido a mi página ✨</h1>
+  <p>Los audios de fondo deberían empezar a sonar automáticamente.</p>
 
-  <audio id="audio-fondo" autoplay></audio>
-  <!-- Video de fondo -->
-  <video class="video-fondo" autoplay loop muted playsinline>
-    <source src="img/video1.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
-  </video>
-
-  <div class="contenedor-collage" id="collage"></div>
-
-  <div id="descripcion" class="descripcion">
-    <div class="descripcion-texto" id="texto-descripcion"></div>
-    <div class="comentario-container">
-      <a class="comentario-link" onclick="mostrarFormulario(0)">Escribir comentario</a>
-      <div class="formulario-comentario" id="formulario-comentario-0" style="display:none;">
-        <textarea id="comentario-texto-0" placeholder="Escribe tu comentario secreto..."></textarea>
-        <button class="enviar-comentario" onclick="enviarComentario(0)">Enviar</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="principal.js"></script>
+  <!-- Aquí enlazas tu JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
 
