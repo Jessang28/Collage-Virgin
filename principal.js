@@ -71,9 +71,9 @@ function enviarComentario(index) {
   const comentario = textarea.value.trim();
 }
 
-// --- AUDIO ---
 const audioFondo = document.getElementById("audio-fondo");
 const inicioOverlay = document.getElementById("inicio-interaccion");
+
 const audiosFondo = [
   "AUDIO/audiofondo1.mp3",
   "AUDIO/audiofondo2.mp3",
@@ -94,6 +94,7 @@ function iniciarAudio() {
   reproducirAleatorio();
   inicioOverlay.style.display = "none";
 
+  // Importante: remover solo después de que play() se intentó
   window.removeEventListener("scroll", iniciarAudio);
   window.removeEventListener("click", iniciarAudio);
   window.removeEventListener("touchstart", iniciarAudio);
