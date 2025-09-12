@@ -74,15 +74,12 @@ function enviarComentario(index) {
 const audioFondo = document.getElementById("audio-fondo");
 const inicioOverlay = document.getElementById("inicio-interaccion");
 
-const audioFondo = document.getElementById("audio-fondo");
-const inicioOverlay = document.getElementById("inicio-interaccion");
-
 // rutas de los audios
 const audiosFondo = [
-  "AUDIO/audiofondo1.mp3",
-  "AUDIO/audiofondo2.mp3",
-  "AUDIO/audiofondo3.mp3",
-  "AUDIO/audiofondo4.mp3"
+  "audio/audio1.mp3",
+  "audio/audio2.mp3",
+  "audio/audio3.mp3",
+  "audio/audio4.mp3"
 ];
 
 function reproducirAleatorio() {
