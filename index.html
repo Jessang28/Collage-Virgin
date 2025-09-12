@@ -8,11 +8,13 @@
 </head>
 <body>
 
+  <!-- Overlay para iniciar interacción -->
+  <div id="inicio-interaccion" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);color:white;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;z-index:9999;">
+    Toca o haz scroll para iniciar
+  </div>
+
   <!-- Audio de fondo -->
-  <audio id="audio-fondo">
-    <source src="AUDIO/audiofondo1.mp3" type="audio/mp3">
-    Tu navegador no soporta el elemento de audio.
-  </audio>
+  <audio id="audio-fondo"></audio>
 
   <!-- Video de fondo -->
   <video class="video-fondo" autoplay loop muted playsinline>
