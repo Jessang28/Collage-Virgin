@@ -79,7 +79,8 @@ const audiosFondo = [
   "audio/audiofondo4.mp3"
 ];
 
-const audioFondo = new Audio();
+// usamos el <audio> del HTML
+const audioFondo = document.getElementById("audio-fondo");
 audioFondo.volume = 0.5; // volumen moderado
 
 function reproducirAleatorio() {
@@ -94,26 +95,3 @@ audioFondo.addEventListener("ended", reproducirAleatorio);
 
 // inicia la reproducción al cargar la página
 window.addEventListener("load", reproducirAleatorio);
-
-
-  if (comentario) {
-    const audioContainer = document.getElementById(`audio-${index}`);
-
-  // Detener cualquier otro audio sonando
-  const audios = document.querySelectorAll('audio');
-  audios.forEach(audio => {
-    audio.pause();
-    audio.currentTime = 0;
-  });
-
-  // Reproducir el audio correspondiente automáticamente
-  audioContainer.innerHTML = `
-    <p>La virgencita te deja este consejo:</p>
-    <audio controls autoplay>
-      <source src="audio/virgen${index + 1}.mp3" type="audio/mpeg">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
-  `;
-    textarea.value = '';
-  }
-
