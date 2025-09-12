@@ -1,3 +1,4 @@
+// --- Collage de imágenes ---
 const imagenes = [
   { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
   { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
@@ -70,9 +71,9 @@ function enviarComentario(index) {
   const comentario = textarea.value.trim();
 }
 
-// --- Audios de fondo ---
-const inicioOverlay = document.getElementById("inicio-interaccion");
+// --- AUDIO ---
 const audioFondo = document.getElementById("audio-fondo");
+const inicioOverlay = document.getElementById("inicio-interaccion");
 const audiosFondo = [
   "AUDIO/audiofondo1.mp3",
   "AUDIO/audiofondo2.mp3",
@@ -83,22 +84,22 @@ const audiosFondo = [
 function reproducirAleatorio() {
   const indice = Math.floor(Math.random() * audiosFondo.length);
   audioFondo.src = audiosFondo[indice];
-  audioFondo.play().catch(err => {
-    console.log("Error al reproducir audio:", err);
-  });
+  audioFondo.play().catch(err => console.log("Error reproducir audio:", err));
 }
 
 audioFondo.addEventListener("ended", reproducirAleatorio);
 
-inicioOverlay.addEventListener("click", () => {
+function iniciarAudio() {
   document.body.style.overflow = "auto"; // habilita scroll
   reproducirAleatorio();
   inicioOverlay.style.display = "none";
-});
 
+  window.removeEventListener("scroll", iniciarAudio);
+  window.removeEventListener("click", iniciarAudio);
+  window.removeEventListener("touchstart", iniciarAudio);
+}
 
-
-// Escuchar interacciones del usuario
 window.addEventListener("scroll", iniciarAudio, { once: true });
 window.addEventListener("click", iniciarAudio, { once: true });
 window.addEventListener("touchstart", iniciarAudio, { once: true });
+inicioOverlay.addEventListener("click", iniciarAudio);
