@@ -62,8 +62,39 @@ imagenes.forEach((imagen, index) => {
 function mostrarFormulario(index) {
   const formulario = document.getElementById(`formulario-${index}`);
   formulario.style.display = 'block';
+}
 
-  const audioContainer = document.getElementById(`audio-${index}`);
+function enviarComentario(index) {
+  const formulario = document.getElementById(`formulario-${index}`);
+  const textarea = formulario.querySelector('textarea');
+  const comentario = textarea.value.trim();
+  // --- Reproducción aleatoria de los 4 audios de fondo ---
+const audiosFondo = [
+  "audio/audiofondo1.mp3",
+  "audio/audiofondo2.mp3",
+  "audio/audiofondo3.mp3",
+  "audio/audiofondo4.mp3"
+];
+
+const audioFondo = new Audio();
+audioFondo.volume = 0.5; // volumen moderado
+
+function reproducirAleatorio() {
+  // elegir un audio aleatorio de la lista
+  const indice = Math.floor(Math.random() * audiosFondo.length);
+  audioFondo.src = audiosFondo[indice];
+  audioFondo.play();
+}
+
+// cuando termine un audio, pasa a otro aleatorio
+audioFondo.addEventListener("ended", reproducirAleatorio);
+
+// inicia la reproducción al cargar la página
+window.addEventListener("load", reproducirAleatorio);
+
+
+  if (comentario) {
+    const audioContainer = document.getElementById(`audio-${index}`);
 
   // Detener cualquier otro audio sonando
   const audios = document.querySelectorAll('audio');
@@ -80,4 +111,8 @@ function mostrarFormulario(index) {
       Tu navegador no soporta el elemento de audio.
     </audio>
   `;
+    textarea.value = '';
+  }
 }
+
+
