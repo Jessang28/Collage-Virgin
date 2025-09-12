@@ -74,6 +74,10 @@ function enviarComentario(index) {
 const audioFondo = document.getElementById("audio-fondo");
 const inicioOverlay = document.getElementById("inicio-interaccion");
 
+const audioFondo = document.getElementById("audio-fondo");
+const inicioOverlay = document.getElementById("inicio-interaccion");
+
+// rutas de los audios
 const audiosFondo = [
   "AUDIO/audiofondo1.mp3",
   "AUDIO/audiofondo2.mp3",
@@ -87,6 +91,7 @@ function reproducirAleatorio() {
   audioFondo.play().catch(err => console.log("Error reproducir audio:", err));
 }
 
+// cuando termine, elegir otro al azar
 audioFondo.addEventListener("ended", reproducirAleatorio);
 
 function iniciarAudio() {
@@ -94,7 +99,7 @@ function iniciarAudio() {
   reproducirAleatorio();
   inicioOverlay.style.display = "none";
 
-  // Importante: remover solo después de que play() se intentó
+  // quitar listeners una vez arranque
   window.removeEventListener("scroll", iniciarAudio);
   window.removeEventListener("click", iniciarAudio);
   window.removeEventListener("touchstart", iniciarAudio);
