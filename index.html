@@ -8,9 +8,6 @@
 </head>
 <body>
 
-  <!-- Audio de fondo -->
-  <audio id="audio-fondo" autoplay></audio>
-
   <!-- Video de fondo -->
   <video class="video-fondo" autoplay loop muted playsinline>
     <source src="img/video1.mp4" type="video/mp4">
@@ -30,27 +27,9 @@
     </div>
   </div>
 
-  <script>
-    const audio = document.getElementById("audio-fondo");
-    const audios = [
-      "AUDIO/audiofondo1.mp3",
-      "AUDIO/audiofondo2.mp3",
-      "AUDIO/audiofondo3.mp3",
-      "AUDIO/audiofondo4.mp3"
-    ];
-
-    function reproducirAleatorio() {
-      const indice = Math.floor(Math.random() * audios.length);
-      audio.src = audios[indice];
-      audio.play();
-    }
-
-    audio.addEventListener("ended", reproducirAleatorio);
-    window.addEventListener("load", reproducirAleatorio);
-  </script>
-
   <script src="principal.js"></script>
 </body>
 </html>
+
 
 
