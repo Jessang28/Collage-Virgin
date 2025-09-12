@@ -1,4 +1,3 @@
-// --- Collage de imágenes ---
 const imagenes = [
   { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
   { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
@@ -69,19 +68,17 @@ function enviarComentario(index) {
   const formulario = document.getElementById(`formulario-${index}`);
   const textarea = formulario.querySelector('textarea');
   const comentario = textarea.value.trim();
-  // aquí podrías manejar el comentario
 }
 
-// --- Reproducción de audios al primer scroll/click/touch ---
+// --- Audios de fondo ---
+const inicioOverlay = document.getElementById("inicio-interaccion");
+const audioFondo = document.getElementById("audio-fondo");
 const audiosFondo = [
   "AUDIO/audiofondo1.mp3",
   "AUDIO/audiofondo2.mp3",
   "AUDIO/audiofondo3.mp3",
   "AUDIO/audiofondo4.mp3"
 ];
-
-const audioFondo = document.getElementById("audio-fondo");
-audioFondo.volume = 0.5; // volumen moderado
 
 function reproducirAleatorio() {
   const indice = Math.floor(Math.random() * audiosFondo.length);
@@ -91,23 +88,14 @@ function reproducirAleatorio() {
   });
 }
 
-// Cuando termina un audio, pasa a otro aleatorio
 audioFondo.addEventListener("ended", reproducirAleatorio);
 
-// Variable para que solo se active una vez
-let audioIniciado = false;
+inicioOverlay.addEventListener("click", () => {
+  document.body.style.overflow = "auto"; // habilita scroll
+  reproducirAleatorio();
+  inicioOverlay.style.display = "none";
+});
 
-function iniciarAudio() {
-  if (!audioIniciado) {
-    audioIniciado = true;
-    reproducirAleatorio();
-  }
-}
-
-// Escuchar interacciones del usuario
-window.addEventListener("scroll", iniciarAudio, { once: true });
-window.addEventListener("click", iniciarAudio, { once: true });
-window.addEventListener("touchstart", iniciarAudio, { once: true });
 
 
 // Escuchar interacciones del usuario
