@@ -68,16 +68,49 @@ function enviarComentario(index) {
   const formulario = document.getElementById(`formulario-${index}`);
   const textarea = formulario.querySelector('textarea');
   const comentario = textarea.value.trim();
+  // --- Reproducción aleatoria de los 4 audios de fondo ---
+const audiosFondo = [
+  "audio/audiofondo1.mp3",
+  "audio/audiofondo2.mp3",
+  "audio/audiofondo3.mp3",
+  "audio/audiofondo4.mp3"
+];
+
+const audioFondo = new Audio();
+audioFondo.volume = 0.5; // volumen moderado
+
+function reproducirAleatorio() {
+  // elegir un audio aleatorio de la lista
+  const indice = Math.floor(Math.random() * audiosFondo.length);
+  audioFondo.src = audiosFondo[indice];
+  audioFondo.play();
+}
+
+// cuando termine un audio, pasa a otro aleatorio
+audioFondo.addEventListener("ended", reproducirAleatorio);
+
+// inicia la reproducción al cargar la página
+window.addEventListener("load", reproducirAleatorio);
+
 
   if (comentario) {
     const audioContainer = document.getElementById(`audio-${index}`);
-    audioContainer.innerHTML = `
-      <p>La virgencita te deja este consejo:</p>
-      <audio controls>
-        <source src="audio/virgen${index + 1}.mp4" type="audio/mp4">
-        Tu navegador no soporta el elemento de audio.
-      </audio>
-    `;
+
+  // Detener cualquier otro audio sonando
+  const audios = document.querySelectorAll('audio');
+  audios.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  // Reproducir el audio correspondiente automáticamente
+  audioContainer.innerHTML = `
+    <p>La virgencita te deja este consejo:</p>
+    <audio controls autoplay>
+      <source src="audio/virgen${index + 1}.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  `;
     textarea.value = '';
   }
 }
