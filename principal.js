@@ -1,3 +1,4 @@
+// --- COLLAGE DE IMÁGENES ---
 const imagenes = [
   { name: "Virgen de Guadalupe", url: "img/virgen1.png", descripcion: "La Virgen de Guadalupe es una de las figuras más veneradas de la cultura mexicana, simbolizando la fe y la protección. Su aparición en 1531 a Juan Diego se ha convertido en un ícono de esperanza." },
   { name: "Virgen María", url: "img/virgen2.png", descripcion: "La Virgen María, madre de Jesús, es considerada la madre espiritual de la humanidad. Su figura es venerada en numerosas culturas y religiones." },
@@ -68,10 +69,11 @@ function enviarComentario(index) {
   const formulario = document.getElementById(`formulario-${index}`);
   const textarea = formulario.querySelector('textarea');
   const comentario = textarea.value.trim();
-  }
+  // Aquí puedes agregar más lógica si quieres
+}
 
-
- const audiosFondo = [
+// --- AUDIOS DE FONDO ---
+const audiosFondo = [
   "AUDIO/audiofondo1.mp3",
   "AUDIO/audiofondo2.mp3",
   "AUDIO/audiofondo3.mp3",
@@ -79,28 +81,31 @@ function enviarComentario(index) {
 ];
 
 const audioFondo = new Audio();
-audioFondo.volume = 0.5; // volumen moderado
+audioFondo.volume = 0.5;
 
 function reproducirAleatorio() {
   const indice = Math.floor(Math.random() * audiosFondo.length);
   audioFondo.src = audiosFondo[indice];
-  audioFondo.play().catch(err => {
-    console.log("Error al reproducir audio:", err);
-  });
+  audioFondo.play().catch(err => console.log("Error al reproducir audio:", err));
 }
 
-// Cuando termina un audio, pasa a otro aleatorio
+// Reproducir siguiente audio al terminar
 audioFondo.addEventListener("ended", reproducirAleatorio);
 
-// Variable para que solo se active una vez
+// Iniciar audio solo tras la primera interacción
 let audioIniciado = false;
-
 function iniciarAudio() {
   if (!audioIniciado) {
     audioIniciado = true;
     reproducirAleatorio();
   }
 }
+
+// Escuchar interacciones
+["scroll", "click", "touchstart"].forEach(evt =>
+  window.addEventListener(evt, iniciarAudio, { once: true })
+);
+
 
 // Escuchar interacciones del usuario
 window.addEventListener("scroll", iniciarAudio, { once: true });
