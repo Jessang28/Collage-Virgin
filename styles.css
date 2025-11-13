@@ -44,9 +44,10 @@ body {
   background: rgba(0, 0, 0, 0.95);
   color: white;
   display: none;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start; /* ahora el contenido empieza desde arriba */
   align-items: center;
-  padding: 40px;
+  padding: 80px 40px 40px 40px; /* espacio arriba para el botón */
   z-index: 9999;
   overflow-y: auto;
 }
