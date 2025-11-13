@@ -1,117 +1,127 @@
-/* base */
 :root{
-  --accent: #FFD700;
-  --dark: #000;
+  --accent:#FFD700;
   --panel: rgba(0,0,0,0.95);
+  --dark:#000;
 }
+
+/* base */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;padding:0}
 body{
-  font-family: "Cinzel Decorative", Georgia, serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--dark);
-  overflow:hidden;
-  color:white;
+  color: #fff;
+  overflow: hidden;
 }
 
-/* background video/gif */
+/* fallback background GIF (if video missing) */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("video/fondo 1.gif") no-repeat center center fixed;
+  background-size: cover;
+  z-index: -3;
+  opacity: 1;
+}
+
+/* video above the gif */
 .video-fondo{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-/* overlay that forces interaction before audio */
+/* overlay forcing interaction */
 .inicio-overlay{
-  position:fixed;
+  position: fixed;
   inset:0;
+  background: rgba(0,0,0,0.62);
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,0.6);
   z-index:10000;
-  font-size:2rem;
-  cursor:pointer;
+  font-size:1.9rem;
   text-align:center;
+  cursor:pointer;
   padding:1rem;
 }
 
-/* COLLAGE container uses absolute-positioned items for free layout */
+/* COLLAGE (uses absolute positioned items for organic layout) */
 .collage-container{
-  position:relative;
-  width:100vw;
+  position: relative;
+  width:100%;
   min-height:100vh;
-  padding:30px;
   z-index:1;
+  /* small padding so items don't stick to edges */
+  padding:24px;
 }
 
-/* each collage item (virgen) */
+/* each virgen card (absolute placement) */
 .collage-item{
   position:absolute;
-  transform-origin:center center;
-  transition:transform .25s ease, box-shadow .25s ease;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:.4rem;
   text-align:center;
-  z-index:2;
+  transition: transform .22s ease, box-shadow .22s ease;
   cursor:pointer;
+  z-index:2;
   user-select:none;
 }
 
-/* virgen image size adjusted (larger, responsive) */
+/* virgen image size (bigger, responsive) */
 .collage-item img{
-  width:260px;
-  max-width:28vw;
+  width:300px;            /* default visual size (bigger) */
+  max-width:30vw;        /* responsive cap */
   height:auto;
-  border-radius:10px;
+  border-radius:12px;
   display:block;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  transition: transform .22s ease;
 }
 
-/* name under each virgen */
+/* name below image */
 .collage-item .nombre{
-  color:var(--accent);
+  color: var(--accent);
   font-size:1.05rem;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
-  margin-top:.25rem;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+  margin-top:.2rem;
 }
 
-/* hover effect */
+/* hover */
 .collage-item:hover{
-  transform:scale(1.08);
+  transform: scale(1.07);
   z-index:999;
 }
 
-/* DESCRIPTION overlay (full-screen modal) */
+/* modal / description overlay */
 .descripcion{
   position:fixed;
   inset:0;
   display:none;
   background:var(--panel);
   z-index:10001;
-  padding:70px 40px 40px;
+  padding:72px 32px 40px;
   overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
 }
 
-/* inside description: gallery area and controls */
+/* inner area that holds gallery + controls */
 .descripcion-inner{
   width:100%;
   max-width:1200px;
   margin:0 auto;
-  color:white;
   display:flex;
   flex-direction:column;
-  gap:1.2rem;
+  gap:18px;
   align-items:center;
 }
 
-/* internal gallery grid */
+/* gallery grid inside modal */
 .collage-interno{
   display:flex;
   flex-wrap:wrap;
@@ -120,59 +130,48 @@ body{
   width:100%;
 }
 
-/* internal photo card */
+/* internal photo card style */
 .foto-interna{
-  width:220px;
-  height:220px;
+  width:240px;
+  height:240px;
   object-fit:cover;
   border-radius:10px;
-  border:2px solid rgba(255,215,0,0.25);
+  border:2px solid rgba(255,215,0,0.2);
   box-shadow:0 6px 18px rgba(0,0,0,0.6);
-  transition:transform .2s ease;
+  transition: transform .18s ease;
 }
-.foto-interna:hover{ transform:scale(1.05) }
+.foto-interna:hover{ transform:scale(1.04) }
 
 /* comment area */
-.comentario-container{ margin-top:.6rem; text-align:center; width:100% }
-.comentario-link{ color:var(--accent); text-decoration:underline; cursor:pointer; font-size:1rem; display:inline-block; margin-bottom:.5rem; }
-.formulario-comentario{ display:none; margin-top:.6rem; }
+.comentario-container{ margin-top:6px; width:100%; text-align:center }
+.comentario-link{ color:var(--accent); text-decoration:underline; cursor:pointer; display:inline-block; margin-bottom:6px; font-size:1rem; }
+.formulario-comentario{ display:none; margin-top:8px; }
 .formulario-comentario textarea{
-  width:90%;
-  max-width:700px;
-  height:100px;
-  background:#111;
-  color:white;
-  border:1px solid var(--accent);
-  padding:10px;
-  border-radius:8px;
-  resize:none;
+  width:90%; max-width:760px; height:110px; background:#111; color:white; border:1px solid var(--accent); padding:10px; border-radius:8px; resize:none;
 }
 
-/* boton volver (top-right inside modal) */
+/* volver button - pretty and using Cinzel Decorative (from HTML head) */
 .boton-volver{
   position:fixed;
-  top:22px;
-  right:22px;
-  background:var(--accent);
-  color:#111;
+  top:18px;
+  right:18px;
+  background: var(--accent);
+  color: #111;
   border:none;
   padding:10px 18px;
-  border-radius:30px;
-  cursor:pointer;
+  border-radius:28px;
+  font-family: "Cinzel Decorative", serif;
   font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
   z-index:10002;
   box-shadow: 0 8px 24px rgba(255,215,0,0.12);
 }
+.boton-volver:hover{ transform:scale(1.03); background: #fff; color:#000; }
 
-/* small screens */
-@media (max-width:640px){
-  .collage-item img{ width:140px; max-width:40vw }
+/* responsive */
+@media (max-width:720px){
+  .collage-item img{ width:160px; max-width:40vw }
   .foto-interna{ width:150px; height:150px }
   .boton-volver{ padding:8px 12px; font-size:.95rem }
 }
-
-
-
-
-
-
