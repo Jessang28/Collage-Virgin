@@ -1,119 +1,176 @@
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: black;
-  color: white;
-  font-family: 'Cinzel Decorative', cursive;
+/* base */
+:root{
+  --accent: #FFD700;
+  --dark: #000;
+  --panel: rgba(0,0,0,0.95);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0}
+body{
+  font-family: "Cinzel Decorative", Georgia, serif;
+  background: var(--dark);
+  overflow:hidden;
+  color:white;
 }
 
-.video-fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+/* background video/gif */
+.video-fondo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 9999;
+/* overlay that forces interaction before audio */
+.inicio-overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.6);
+  z-index:10000;
+  font-size:2rem;
+  cursor:pointer;
+  text-align:center;
+  padding:1rem;
 }
 
-/* COLLAGE PRINCIPAL */
-.contenedor-collage {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 60px;
-  justify-items: center;
+/* COLLAGE container uses absolute-positioned items for free layout */
+.collage-container{
+  position:relative;
+  width:100vw;
+  min-height:100vh;
+  padding:30px;
+  z-index:1;
 }
 
-.virgen {
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+/* each collage item (virgen) */
+.collage-item{
+  position:absolute;
+  transform-origin:center center;
+  transition:transform .25s ease, box-shadow .25s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.4rem;
+  text-align:center;
+  z-index:2;
+  cursor:pointer;
+  user-select:none;
 }
 
-.virgen:hover {
-  transform: scale(1.1);
+/* virgen image size adjusted (larger, responsive) */
+.collage-item img{
+  width:260px;
+  max-width:28vw;
+  height:auto;
+  border-radius:10px;
+  display:block;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
-.virgen img {
-  width: 180px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+/* name under each virgen */
+.collage-item .nombre{
+  color:var(--accent);
+  font-size:1.05rem;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+  margin-top:.25rem;
 }
 
-.virgen h3 {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: white;
+/* hover effect */
+.collage-item:hover{
+  transform:scale(1.08);
+  z-index:999;
 }
 
-/* DESCRIPCIÓN */
-.descripcion {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(5, 5, 5, 0.95);
-  color: white;
-  padding: 40px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  z-index: 999;
+/* DESCRIPTION overlay (full-screen modal) */
+.descripcion{
+  position:fixed;
+  inset:0;
+  display:none;
+  background:var(--panel);
+  z-index:10001;
+  padding:70px 40px 40px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
 
-.descripcion-texto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  justify-items: center;
+/* inside description: gallery area and controls */
+.descripcion-inner{
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  align-items:center;
 }
 
-.descripcion-texto img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+/* internal gallery grid */
+.collage-interno{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+  width:100%;
 }
 
-.boton-volver {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(255,255,255,0.2);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.4);
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
+/* internal photo card */
+.foto-interna{
+  width:220px;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  border:2px solid rgba(255,215,0,0.25);
+  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+  transition:transform .2s ease;
+}
+.foto-interna:hover{ transform:scale(1.05) }
+
+/* comment area */
+.comentario-container{ margin-top:.6rem; text-align:center; width:100% }
+.comentario-link{ color:var(--accent); text-decoration:underline; cursor:pointer; font-size:1rem; display:inline-block; margin-bottom:.5rem; }
+.formulario-comentario{ display:none; margin-top:.6rem; }
+.formulario-comentario textarea{
+  width:90%;
+  max-width:700px;
+  height:100px;
+  background:#111;
+  color:white;
+  border:1px solid var(--accent);
+  padding:10px;
+  border-radius:8px;
+  resize:none;
 }
 
-.boton-volver:hover {
-  background: rgba(255,255,255,0.4);
+/* boton volver (top-right inside modal) */
+.boton-volver{
+  position:fixed;
+  top:22px;
+  right:22px;
+  background:var(--accent);
+  color:#111;
+  border:none;
+  padding:10px 18px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:700;
+  z-index:10002;
+  box-shadow: 0 8px 24px rgba(255,215,0,0.12);
 }
+
+/* small screens */
+@media (max-width:640px){
+  .collage-item img{ width:140px; max-width:40vw }
+  .foto-interna{ width:150px; height:150px }
+  .boton-volver{ padding:8px 12px; font-size:.95rem }
+}
+
 
 
 
