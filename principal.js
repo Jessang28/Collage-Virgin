@@ -26,8 +26,8 @@ const container = document.getElementById('collage');
 const descripcionDiv = document.getElementById('descripcion');
 const textoDescripcion = document.getElementById('texto-descripcion');
 
-// Crear las vírgenes en posiciones aleatorias
-imagenes.forEach((imagen, index) => {
+// --- Crear las vírgenes en posiciones aleatorias ---
+imagenes.forEach(imagen => {
   const item = document.createElement('div');
   item.className = 'collage-item';
   item.style.left = `${Math.random() * 80}%`;
@@ -37,28 +37,19 @@ imagenes.forEach((imagen, index) => {
   imgElement.src = imagen.url;
   imgElement.alt = imagen.name;
 
-  const nombre = document.createElement('div');
-  nombre.className = 'nombre';
-  nombre.textContent = imagen.name;
-
   item.appendChild(imgElement);
-  item.appendChild(nombre);
   container.appendChild(item);
 
   // Al hacer clic, mostrar las fotos internas
   item.addEventListener('click', () => {
-    const collageInterno = imagen.fotos.map(foto => `
-      <img src="${foto}" alt="foto interna" class="foto-interna"/>
-    `).join('');
-
-    textoDescripcion.innerHTML = `
-      <div class="collage-interno">${collageInterno}</div>
-    `;
+    const collageInterno = imagen.fotos
+      .map(foto => `<img src="${foto}" alt="foto interna" class="foto-interna"/>`)
+      .join('');
+    textoDescripcion.innerHTML = `<div class="collage-interno">${collageInterno}</div>`;
     descripcionDiv.style.display = 'flex';
   });
 });
 
-// Función para cerrar el recuadro
 function cerrarDescripcion() {
   descripcionDiv.style.display = 'none';
 }
@@ -66,7 +57,6 @@ function cerrarDescripcion() {
 // --- Audio de fondo ---
 const audioFondo = document.getElementById("audio-fondo");
 const inicioOverlay = document.getElementById("inicio-interaccion");
-
 const audiosFondo = [
   "audio/audio1.mp3",
   "audio/audio2.mp3",
@@ -86,13 +76,12 @@ function iniciarAudio() {
   document.body.style.overflow = "auto";
   reproducirAleatorio();
   inicioOverlay.style.display = "none";
-
   window.removeEventListener("scroll", iniciarAudio);
   window.removeEventListener("click", iniciarAudio);
   window.removeEventListener("touchstart", iniciarAudio);
 }
 
-window.addEventListener("scroll", iniciarAudio, { once: true });
-window.addEventListener("click", iniciarAudio, { once: true });
-window.addEventListener("touchstart", iniciarAudio, { once: true });
+["scroll", "click", "touchstart"].forEach(evt => {
+  window.addEventListener(evt, iniciarAudio, { once: true });
+});
 inicioOverlay.addEventListener("click", iniciarAudio);
