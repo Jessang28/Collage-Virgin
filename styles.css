@@ -140,6 +140,48 @@ button.enviar-comentario {
   box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
   transform: scale(1.05);
 }
+.collage-interno {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto-interna {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.foto-interna:hover {
+  transform: scale(1.1);
+}
+
+.boton-volver {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 215, 0, 0.9);
+  color: black;
+  border: none;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.boton-volver:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
 
 
 
