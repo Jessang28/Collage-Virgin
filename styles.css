@@ -1,105 +1,120 @@
 body {
-  height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  position: relative;
-  background: url("video/fondo 1.gif") no-repeat center center fixed;
-  background-size: cover;
+  background-color: black;
+  color: white;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
 .video-fondo {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  z-index: -2;
+  z-index: -1;
 }
 
-.collage-item {
-  position: absolute;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.collage-item img {
-  width: 220px;
-  height: auto;
-  max-width: 30vw;
-  transition: transform 0.3s ease;
-}
-
-.collage-item:hover {
-  transform: scale(1.2);
-  z-index: 10;
-}
-
-.descripcion {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
   color: white;
-  display: none;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 80px 40px 40px 40px;
-  z-index: 9999;
-  overflow-y: auto;
-}
-
-.descripcion-texto {
-  width: 90%;
-  text-align: center;
-}
-
-.collage-interno {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 9999;
 }
 
-.foto-interna {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border: 2px solid #FFD700;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+/* COLLAGE PRINCIPAL */
+.contenedor-collage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 60px;
+  justify-items: center;
+}
+
+.virgen {
+  text-align: center;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.foto-interna:hover {
+.virgen:hover {
   transform: scale(1.1);
+}
+
+.virgen img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.virgen h3 {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: white;
+}
+
+/* DESCRIPCIÓN */
+.descripcion {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.95);
+  color: white;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.descripcion-texto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.descripcion-texto img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 .boton-volver {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: rgba(255, 215, 0, 0.9);
-  color: black;
-  border: none;
-  font-size: 1.1rem;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
   padding: 10px 20px;
   border-radius: 30px;
+  font-size: 1rem;
   cursor: pointer;
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  z-index: 10000;
+  transition: 0.3s;
 }
 
 .boton-volver:hover {
-  background: #fff;
-  color: #000;
-  transform: scale(1.05);
+  background: rgba(255,255,255,0.4);
 }
+
 
 
 
