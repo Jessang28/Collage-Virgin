@@ -22,12 +22,10 @@ body {
   cursor: pointer;
 }
 
-.collage-item .nombre {
-  color: #fff;
-  margin-top: 0.5rem;
-  text-align: center;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 4px #000;
+.collage-item img {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
 .collage-item:hover {
@@ -45,101 +43,18 @@ body {
   color: white;
   display: none;
   flex-direction: column;
-  justify-content: flex-start; /* ahora el contenido empieza desde arriba */
+  justify-content: flex-start;
   align-items: center;
-  padding: 80px 40px 40px 40px; /* espacio arriba para el botón */
+  padding: 80px 40px 40px 40px;
   z-index: 9999;
   overflow-y: auto;
 }
 
 .descripcion-texto {
   width: 90%;
-  font-size: 2.5rem;
-  line-height: 1.7;
-  text-align: center;
-  word-break: break-word;
-  animation: cambiarFuente 3s infinite alternate;
-}
-
-@keyframes cambiarFuente {
-  0% { font-family: 'Georgia', serif; }
-  25% { font-family: 'Courier New', monospace; }
-  50% { font-family: 'Impact', fantasy; }
-  75% { font-family: 'Lucida Console', monospace; }
-  100% { font-family: 'Verdana', sans-serif; }
-}
-
-.comentario-container {
-  margin-top: 2rem;
   text-align: center;
 }
 
-.comentario-link {
-  display: block;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  color: #FFD700;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.formulario-comentario {
-  display: none;
-  margin-top: 1rem;
-}
-
-textarea {
-  width: 80%;
-  height: 100px;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  padding: 10px;
-  resize: none;
-  background-color: #111;
-  color: white;
-  border: 1px solid #FFD700;
-}
-
-button.enviar-comentario {
-  margin-top: 0.5rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #FFD700;
-  color: black;
-  border: none;
-  cursor: pointer;
-}
-
-.audio-consejo {
-  margin-top: 1rem;
-}
-
-.boton-volver {
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFD700;
-  padding: 10px 22px;
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  border-radius: 50px;
-  font-size: 1rem;
-  font-family: 'Cinzel Decorative', cursive;
-  font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
-  backdrop-filter: blur(6px);
-  z-index: 10000;
-}
-
-.boton-volver:hover {
-  background: rgba(255, 215, 0, 0.25);
-  color: white;
-  box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
-  transform: scale(1.05);
-}
 .collage-interno {
   display: flex;
   flex-wrap: wrap;
@@ -163,31 +78,26 @@ button.enviar-comentario {
 }
 
 .boton-volver {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   background: rgba(255, 215, 0, 0.9);
   color: black;
   border: none;
-  font-size: 1.2rem;
-  padding: 8px 16px;
-  border-radius: 20px;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 30px;
   cursor: pointer;
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: bold;
   transition: all 0.3s ease;
+  z-index: 10000;
 }
 
 .boton-volver:hover {
   background: #fff;
   color: #000;
   transform: scale(1.05);
-}
-#collage {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 5;
 }
 
 
