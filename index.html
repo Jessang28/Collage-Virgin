@@ -9,31 +9,33 @@
 </head>
 <body>
 
-  <!-- Overlay para iniciar interacción -->
-  <div id="inicio-interaccion" class="overlay">
+  <!-- Overlay to require first interaction -->
+  <div id="inicio-interaccion" class="inicio-overlay">
     Toca o haz scroll para iniciar
   </div>
 
-  <!-- Audio de fondo -->
+  <!-- Background audio (controlled by JS) -->
   <audio id="audio-fondo" preload="auto" loop></audio>
 
-  <!-- Video de fondo -->
+  <!-- Video / gif background -->
   <video class="video-fondo" autoplay loop muted playsinline>
     <source src="img/video1.mp4" type="video/mp4">
     Tu navegador no soporta video HTML5.
   </video>
 
-  <!-- Contenedor del collage principal -->
-  <div class="contenedor-collage" id="collage"></div>
+  <!-- Main collage container -->
+  <div id="collage" class="collage-container"></div>
 
-  <!-- Descripción o galería interna -->
-  <div id="descripcion" class="descripcion">
-    <button class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver</button>
-    <div class="descripcion-texto" id="texto-descripcion"></div>
+  <!-- Description modal / internal gallery -->
+  <div id="descripcion" class="descripcion" aria-hidden="true">
+    <button id="btn-volver" class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver al collage</button>
+
+    <div id="descripcion-inner" class="descripcion-inner">
+      <!-- injected content (gallery, comment link, form, audio consejo) -->
+    </div>
   </div>
 
   <script src="principal.js"></script>
 </body>
 </html>
-
 
