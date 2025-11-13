@@ -5,37 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collage de Vírgenes</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- decorative font for the button -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Overlay to require first interaction -->
-  <div id="inicio-interaccion" class="inicio-overlay">
-    Toca o haz scroll para iniciar
-  </div>
+  <div id="inicio-interaccion" class="inicio-overlay">Toca o haz scroll para iniciar</div>
 
-  <!-- Background audio (controlled by JS) -->
-  <audio id="audio-fondo" preload="auto" loop></audio>
+  <!-- Background audio controlled by JS -->
+  <audio id="audio-fondo" preload="auto"></audio>
 
-  <!-- Video / gif background -->
+  <!-- Video (falls back to CSS background if missing) -->
   <video class="video-fondo" autoplay loop muted playsinline>
     <source src="img/video1.mp4" type="video/mp4">
     Tu navegador no soporta video HTML5.
   </video>
 
   <!-- Main collage container -->
-  <div id="collage" class="collage-container"></div>
+  <div id="collage" class="collage-container" aria-live="polite"></div>
 
-  <!-- Description modal / internal gallery -->
+  <!-- Description / gallery modal -->
   <div id="descripcion" class="descripcion" aria-hidden="true">
-    <button id="btn-volver" class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver al collage</button>
-
+    <button id="btn-volver" class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver</button>
     <div id="descripcion-inner" class="descripcion-inner">
-      <!-- injected content (gallery, comment link, form, audio consejo) -->
+      <!-- injected gallery + comment controls -->
     </div>
   </div>
 
   <script src="principal.js"></script>
 </body>
 </html>
+
 
