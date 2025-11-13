@@ -60,6 +60,29 @@ body {
   animation: cambiarFuente 3s infinite alternate;
 }
 
+/* NUEVO botón de volver (solo dentro del cuadro de descripción) */
+.cerrar-descripcion {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10001;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: "Cinzel Decorative", "Times New Roman", serif;
+  transition: all 0.3s ease;
+}
+
+.cerrar-descripcion:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+}
+
+/* Tipografía animada (la vas a eliminar luego si no te gusta) */
 @keyframes cambiarFuente {
   0% { font-family: 'Georgia', serif; }
   25% { font-family: 'Courier New', monospace; }
@@ -112,6 +135,7 @@ button.enviar-comentario {
 .audio-consejo {
   margin-top: 1rem;
 }
+
 
 
 
