@@ -1,88 +1,50 @@
-// --- Collage de imágenes ---
-const imagenes = [
-  { name: "Virgen de Guadalupe", url: "img/virgen1.png", fotos: ["archivo/fotos/foto_duelo1.jpeg", "archivo/fotos/foto_duelo2.jpeg"] },
-  { name: "Virgen María", url: "img/virgen2.png", fotos: ["archivo/fotos/foto_infancia1.jpeg", "archivo/fotos/foto_infancia2.jpeg"] },
-  { name: "Virgen de Fátima", url: "img/virgen3.png", fotos: ["archivo/fotos/foto_infancia3.jpeg", "archivo/fotos/foto_infancia4.jpeg"] },
-  { name: "Virgen de Luján", url: "img/virgen4.png", fotos: ["archivo/fotos/foto_infancia5.jpeg", "archivo/fotos/foto_infancia6.jpeg"] },
-  { name: "Virgen de Czestochowa", url: "img/virgen5.png", fotos: ["archivo/fotos/foto_duelo1.jpeg", "archivo/fotos/foto_infancia2.jpeg"] },
-  { name: "Virgen de Lourdes", url: "img/virgen6.png", fotos: ["archivo/fotos/foto_infancia3.jpeg", "archivo/fotos/foto_infancia5.jpeg"] },
-  { name: "Virgen de la Caridad", url: "img/virgen7.png", fotos: ["archivo/fotos/foto_infancia6.jpeg"] },
-  { name: "Virgen del Carmen", url: "img/virgen8.png", fotos: ["archivo/fotos/foto_duelo1.jpeg"] },
-  { name: "Virgen de Montserrat", url: "img/virgen9.png", fotos: ["archivo/fotos/foto_infancia1.jpeg", "archivo/fotos/foto_infancia2.jpeg"] },
-  { name: "Virgen de la Medalla Milagrosa", url: "img/virgen10.png", fotos: ["archivo/fotos/foto_infancia3.jpeg"] },
-  { name: "Virgen de la Sagrada Familia", url: "img/virgen11.png", fotos: ["archivo/fotos/foto_infancia4.jpeg"] },
-  { name: "Virgen de la Nube", url: "img/virgen12.png", fotos: ["archivo/fotos/foto_infancia5.jpeg"] },
-  { name: "Virgen de la Anunciación", url: "img/virgen13.png", fotos: ["archivo/fotos/foto_infancia6.jpeg"] },
-  { name: "Virgen de los Remedios", url: "img/virgen14.png", fotos: ["archivo/fotos/foto_duelo2.jpeg"] },
-  { name: "Virgen de la Misericordia", url: "img/virgen15.png", fotos: ["archivo/fotos/foto_infancia1.jpeg"] },
-  { name: "Virgen de Guadalupe de Extremadura", url: "img/virgen16.png", fotos: ["archivo/fotos/foto_infancia2.jpeg"] },
-  { name: "Virgen de la Esperanza", url: "img/virgen17.png", fotos: ["archivo/fotos/foto_infancia3.jpeg"] },
-  { name: "Virgen de la Paz", url: "img/virgen18.png", fotos: ["archivo/fotos/foto_infancia4.jpeg"] },
-  { name: "Virgen del Pilar", url: "img/virgen19.png", fotos: ["archivo/fotos/foto_infancia5.jpeg"] },
-  { name: "Virgen de las Mercedes", url: "img/virgen20.png", fotos: ["archivo/fotos/foto_infancia6.jpeg"] }
+const collage = document.getElementById("collage");
+const descripcion = document.getElementById("descripcion");
+const textoDescripcion = document.getElementById("texto-descripcion");
+const overlay = document.getElementById("inicio-interaccion");
+const audioFondo = document.getElementById("audio-fondo");
+
+const virgenes = [
+  { nombre: "Virgen del Duelo", carpeta: "archivo/fotos", imagenes: ["foto_duelo1.jpeg", "foto_duelo2.jpeg"] },
+  { nombre: "Virgen de la Infancia", carpeta: "archivo/fotos", imagenes: ["foto_infancia1.jpeg", "foto_infancia2.jpeg", "foto_infancia3.jpeg", "foto_infancia4.jpeg", "foto_infancia5.jpeg", "foto_infancia6.jpeg"] }
 ];
 
-const container = document.getElementById('collage');
-const descripcionDiv = document.getElementById('descripcion');
-const textoDescripcion = document.getElementById('texto-descripcion');
+// AUDIO aleatorio (opcional)
+const audios = ["audio1.mp3", "audio2.mp3"];
+audioFondo.src = "audio/" + audios[Math.floor(Math.random() * audios.length)];
 
-// --- Crear las vírgenes en posiciones aleatorias ---
-imagenes.forEach(imagen => {
-  const item = document.createElement('div');
-  item.className = 'collage-item';
-  item.style.left = `${10 + Math.random() * 70}%`;
-  item.style.top = `${10 + Math.random() * 70}%`;
-
-  const imgElement = document.createElement('img');
-  imgElement.src = imagen.url;
-  imgElement.alt = imagen.name;
-
-  item.appendChild(imgElement);
-  container.appendChild(item);
-
-  // Al hacer clic, mostrar las fotos internas
-  item.addEventListener('click', () => {
-    const collageInterno = imagen.fotos
-      .map(foto => `<img src="${foto}" alt="foto interna" class="foto-interna"/>`)
-      .join('');
-    textoDescripcion.innerHTML = `<div class="collage-interno">${collageInterno}</div>`;
-    descripcionDiv.style.display = 'flex';
-  });
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+  audioFondo.play().catch(() => {});
 });
+
+function mostrarCollage() {
+  collage.innerHTML = "";
+  virgenes.forEach((virgen, index) => {
+    const div = document.createElement("div");
+    div.classList.add("virgen");
+    div.innerHTML = `
+      <img src="img/virgen${index + 1}.png" alt="${virgen.nombre}">
+      <h3>${virgen.nombre}</h3>
+    `;
+    div.onclick = () => abrirDescripcion(index);
+    collage.appendChild(div);
+  });
+}
+
+function abrirDescripcion(index) {
+  const virgen = virgenes[index];
+  descripcion.style.display = "block";
+  collage.style.display = "none";
+
+  textoDescripcion.innerHTML = virgen.imagenes
+    .map(img => `<img src="${virgen.carpeta}/${img}" alt="${virgen.nombre}">`)
+    .join("");
+}
 
 function cerrarDescripcion() {
-  descripcionDiv.style.display = 'none';
+  descripcion.style.display = "none";
+  collage.style.display = "grid";
 }
 
-// --- Audio de fondo ---
-const audioFondo = document.getElementById("audio-fondo");
-const inicioOverlay = document.getElementById("inicio-interaccion");
-const audiosFondo = [
-  "audio/audio1.mp3",
-  "audio/audio2.mp3",
-  "audio/audio3.mp3",
-  "audio/audio4.mp3"
-];
-
-function reproducirAleatorio() {
-  const indice = Math.floor(Math.random() * audiosFondo.length);
-  audioFondo.src = audiosFondo[indice];
-  audioFondo.play().catch(err => console.log("Error reproducir audio:", err));
-}
-
-audioFondo.addEventListener("ended", reproducirAleatorio);
-
-function iniciarAudio() {
-  document.body.style.overflow = "auto";
-  reproducirAleatorio();
-  inicioOverlay.style.display = "none";
-  window.removeEventListener("scroll", iniciarAudio);
-  window.removeEventListener("click", iniciarAudio);
-  window.removeEventListener("touchstart", iniciarAudio);
-}
-
-["scroll", "click", "touchstart"].forEach(evt => {
-  window.addEventListener(evt, iniciarAudio, { once: true });
-});
-inicioOverlay.addEventListener("click", iniciarAudio);
-
+mostrarCollage();
