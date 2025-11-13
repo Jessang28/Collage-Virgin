@@ -33,22 +33,19 @@
 
   <div class="contenedor-collage" id="collage"></div>
 
-  <!-- DESCRIPCIÓN (CUADRO QUE SE ABRE AL HACER CLIC EN UNA VIRGEN) -->
   <div id="descripcion" class="descripcion">
-    <div class="descripcion-texto" id="texto-descripcion"></div>
+  <div class="descripcion-texto" id="texto-descripcion"></div>
 
-  <!-- Botón de volver al collage -->
-<button class="boton-volver" onclick="cerrarDescripcion()">← Volver</button>
+  <button class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver al collage</button>
 
-    <div class="comentario-container">
-      <a class="comentario-link" onclick="mostrarFormulario(0)">Escribir comentario</a>
-      <div class="formulario-comentario" id="formulario-comentario-0" style="display:none;">
-        <textarea id="comentario-texto-0" placeholder="Escribe tu comentario secreto..."></textarea>
-        <button class="enviar-comentario" onclick="enviarComentario(0)">Enviar</button>
-      </div>
+  <div class="comentario-container">
+    <a class="comentario-link" onclick="mostrarFormulario(0)">Escribir comentario</a>
+    <div class="formulario-comentario" id="formulario-comentario-0" style="display:none;">
+      <textarea id="comentario-texto-0" placeholder="Escribe tu comentario secreto..."></textarea>
+      <button class="enviar-comentario" onclick="enviarComentario(0)">Enviar</button>
     </div>
   </div>
-
+</div>
   <script>
     // Función para cerrar el cuadro de descripción y volver al collage
     function cerrarDescripcion() {
