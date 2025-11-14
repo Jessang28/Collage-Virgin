@@ -16,23 +16,35 @@
   <div id="inicio-interaccion" class="overlay-inicio">
     Toca o haz scroll para iniciar
   </div>
-<script>
-document.getElementById("inicio-interaccion").addEventListener("click", () => {
-  document.getElementById("inicio-interaccion").style.pointerEvents = "none";
-});
-</script>
+
+  <script>
+    document.getElementById("inicio-interaccion").addEventListener("click", () => {
+      document.getElementById("inicio-interaccion").style.pointerEvents = "none";
+    });
+  </script>
+
   <!-- Fondo animado (GIF) -->
   <div class="gif-fondo"></div>
 
-<video class="video-fondo" autoplay loop muted playsinline>
-  <source src="video/fondo 1.gif" type="image/gif">
-</video>
+  <video class="video-fondo" autoplay loop muted playsinline>
+    <source src="video/fondo 1.gif" type="image/gif">
+  </video>
 
   <!-- Audio de fondo -->
   <audio id="audio-fondo" preload="auto" loop></audio>
 
   <!-- Contenedor principal del collage -->
   <div class="contenedor-collage" id="collage"></div>
+
+  <!-- ❤️ NUEVO: CORAZÓN flotante -->
+  <div id="corazon" class="extra-item flotante">
+    <img src="img/corazon.png" class="extra-img" alt="Corazón">
+  </div>
+
+  <!-- 🕊️ NUEVO: AVE flotante -->
+  <div id="ave" class="extra-item flotante">
+    <img src="img/ave.gif" class="extra-img" alt="Ave">
+  </div>
 
   <!-- Descripción al abrir una virgen -->
   <div id="descripcion" class="descripcion">
@@ -41,8 +53,19 @@ document.getElementById("inicio-interaccion").addEventListener("click", () => {
   </div>
 
   <script src="principal.js"></script>
+
+  <script>
+    /* ❤️ HACER QUE EL CORAZÓN ABRA OTRA PÁGINA */
+    document.getElementById("corazon").addEventListener("click", () => {
+      window.location.href = "corazon.html";
+    });
+
+    /* 🕊️ HACER QUE EL AVE ABRA OTRA PÁGINA */
+    document.getElementById("ave").addEventListener("click", () => {
+      window.location.href = "ave.html";
+    });
+  </script>
+
 </body>
 </html>
-
-
 
