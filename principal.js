@@ -181,6 +181,39 @@ item.addEventListener("click", () => {
 function cerrarDescripcion() {
   descripcionDiv.style.display = "none";
 }
+// -----------------------------------------------------------
+// AÑADIR CORAZÓN Y AVE AL COLLAGE (UNA SOLA VEZ CADA UNO)
+// -----------------------------------------------------------
+function crearExtraElemento(imagenSrc, linkDestino) {
+  const extra = document.createElement("img");
+  extra.src = imagenSrc;
+  extra.className = "extra-elemento";
+
+  // posición aleatoria
+  extra.style.position = "absolute";
+  extra.style.left = `${Math.random() * 75}%`;
+  extra.style.top = `${Math.random() * 75}%`;
+
+  // tamaño grande
+  extra.style.width = "250px";
+  extra.style.height = "auto";
+  extra.style.cursor = "pointer";
+
+  // movimiento aleatorio suave
+  extra.style.animation = "flotar 6s infinite ease-in-out";
+
+  extra.addEventListener("click", () => {
+    window.location.href = linkDestino;
+  });
+
+  container.appendChild(extra);
+}
+
+// Crear CORAZÓN (PNG)
+crearExtraElemento("img/corazon.png", "corazon.html");
+
+// Crear AVE (GIF)
+crearExtraElemento("img/ave.gif", "ave.html");
 
 // AUDIO aleatorio
 const audioFondo = document.getElementById("audio-fondo");
