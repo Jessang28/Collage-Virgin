@@ -163,3 +163,20 @@ body {
   text-shadow: 0 0 6px black;
   pointer-events: none; /* para que no bloquee el click */
 }
+.collage-interno {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.foto-interna {
+  flex: 1;              /* divide la pantalla entre todas las fotos */
+  height: 100vh;
+  object-fit: cover;    /* asegura que llenen toda su mitad */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
