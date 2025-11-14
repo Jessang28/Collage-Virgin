@@ -1,3 +1,6 @@
+/* import fuente gótica (UnifrakturCook) */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
 /* Fondo general */
 body {
   margin: 0;
@@ -59,12 +62,15 @@ body {
   position: absolute;
   text-align: center;
   cursor: pointer;
+  /* añadimos la clase flotante en JS para animarlas */
 }
 
 .collage-item img {
-  width: 320px;   /* virgenes más grandes */
+  width: 320px;   /* virgenes tamaño que acordamos */
   height: auto;
   transition: transform 0.3s ease;
+  display: block;
+  user-select: none;
 }
 
 .collage-item:hover img {
@@ -76,12 +82,14 @@ body {
 .nombre-virgen {
   margin-top: 5px;
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  text-shadow: 0 0 5px black;
+  text-shadow: 0 0 6px black;
+  pointer-events: none; /* para no bloquear clicks */
+  font-family: 'Cinzel Decorative', serif;
 }
 
-/* DESCRIPCIÓN */
+/* DESCRIPCIÓN (overlay cuando abres una virgen) */
 .descripcion {
   position: fixed;
   top: 0;
@@ -93,36 +101,75 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
-  padding: 80px 40px 40px;
+  padding: 0; /* ajustamos, las fotos internas ocupan todo */
   z-index: 9998;
-  overflow-y: auto;
+  overflow: hidden; /* evitar scroll interno innecesario */
 }
 
+/* contenedor donde inyectamos fotos internas y texto */
 .descripcion-texto {
-  width: 90%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Nombre grande en overlay (arriba, centrado) */
+.nombre-overlay {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  z-index: 10002;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(0,0,0,0.8);
+  font-family: 'Cinzel Decorative', serif;
+  pointer-events: none;
+}
+
+/* Oración grande, gótica, encima de las fotos (centrada) */
+.oracion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10002;
+  color: rgba(255,255,255,0.95);
   text-align: center;
+  font-size: 48px; /* grande */
+  line-height: 1.05;
+  max-width: 90%;
+  text-shadow: 0 0 18px rgba(0,0,0,0.7), 0 0 30px rgba(255,215,0,0.07);
+  font-family: 'UnifrakturCook', 'Cinzel Decorative', serif;
+  pointer-events: none;
 }
 
-/* FOTOS INTERNAS */
+/* FOTOS INTERNAS: ocupan la pantalla completa dividida entre ellas */
+/* .collage-interno mantiene layout flex a pantalla completa */
 .collage-interno {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  align-items: stretch;
+  justify-content: stretch;
 }
 
+/* Cada foto ocupa su fracción y NO se recorta: object-fit: contain */
 .foto-interna {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border: 3px solid #FFD700;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255,215,0,0.6);
-  transition: transform 0.3s ease;
-}
-
-.foto-interna:hover {
-  transform: scale(1.1);
+  flex: 1;               /* divide la pantalla entre todas las fotos internas */
+  height: 100vh;
+  display: block;
+  width: 100%;
+  object-fit: contain;   /* <-- evita recorte; mantiene aspecto */
+  background: #000;      /* letterbox si es necesario */
+  background-position: center;
+  background-size: contain;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* BOTÓN VOLVER */
@@ -140,47 +187,15 @@ body {
   font-family: 'Cinzel Decorative', serif;
   font-weight: bold;
   transition: 0.3s ease;
-  z-index: 10000;
+  z-index: 10003;
 }
 
 .boton-volver:hover {
   background: white;
   transform: scale(1.05);
 }
-.overlay-inicio {
-  pointer-events: auto;
-}
 
-.descripcion {
-  pointer-events: auto;
-}
-.nombre-virgen {
-  display: block;
-  margin-top: 8px;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-shadow: 0 0 6px black;
-  pointer-events: none; /* para que no bloquee el click */
-}
-.collage-interno {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  gap: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.foto-interna {
-  flex: 1;              /* divide la pantalla entre todas las fotos */
-  height: 100vh;
-  object-fit: cover;    /* asegura que llenen toda su mitad */
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-/* Iconos extra del collage */
+/* Iconos extra del collage (corazón y ave si existen en HTML) */
 .extra-item {
   position: absolute;
   cursor: pointer;
@@ -190,20 +205,26 @@ body {
 .extra-img {
   width: 420px;   /* BIEN GRANDES */
   height: auto;
-  animation: moverExtra 10s infinite alternate ease-in-out;
+  display: block;
 }
 
-/* Movimiento suave tipo flotante */
-@keyframes moverExtra {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(40px, -40px); }
-}
+/* Movimiento suave tipo flotante para elementos con clase .flotante */
 @keyframes flotar {
   0%   { transform: translateY(0); }
-  100% { transform: translateY(-25px); }
+  50%  { transform: translateY(-18px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 .flotante {
-  animation: flotar 3s ease-in-out infinite alternate;
+  animation: flotar 4.5s ease-in-out infinite;
 }
+
+/* small responsiveness */
+@media (max-width: 800px) {
+  .collage-item img { width: 180px; }
+  .extra-img { width: 220px; }
+  .oracion { font-size: 28px; }
+  .nombre-overlay { font-size: 20px; }
+}
+
 
