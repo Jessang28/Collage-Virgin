@@ -180,3 +180,21 @@ body {
   border-radius: 0;
   box-shadow: none;
 }
+/* Iconos extra del collage */
+.extra-item {
+  position: absolute;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.extra-img {
+  width: 420px;   /* BIEN GRANDES */
+  height: auto;
+  animation: moverExtra 10s infinite alternate ease-in-out;
+}
+
+/* Movimiento suave tipo flotante */
+@keyframes moverExtra {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(40px, -40px); }
+}
