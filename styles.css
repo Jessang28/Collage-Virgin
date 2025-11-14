@@ -198,3 +198,12 @@ body {
   0%   { transform: translate(0, 0); }
   100% { transform: translate(40px, -40px); }
 }
+@keyframes flotar {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-25px); }
+}
+
+.flotante {
+  animation: flotar 3s ease-in-out infinite alternate;
+}
+
