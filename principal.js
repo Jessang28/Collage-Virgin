@@ -73,7 +73,13 @@ function reproducirAleatorio() {
   audioFondo.play();
 }
 
-document.getElementById("inicio-interaccion").addEventListener("click", () => {
+const inicio = document.getElementById("inicio-interaccion");
+
+function iniciarTodo() {
   reproducirAleatorio();
-  document.getElementById("inicio-interaccion").style.display = "none";
-});
+  inicio.style.display = "none";
+}
+
+inicio.addEventListener("click", iniciarTodo);
+inicio.addEventListener("wheel", iniciarTodo);  // también funciona con scroll
+inicio.addEventListener("touchstart", iniciarTodo);
