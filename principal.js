@@ -157,6 +157,37 @@ imagenes.forEach(img => {
 
   item.appendChild(imagenElement);
   item.appendChild(nombre);
+  //---------------------------------------------
+// AÑADIR CORAZÓN Y AVE AL COLLAGE
+//---------------------------------------------
+
+function crearExtra(id, imagen, link) {
+  const item = document.createElement("div");
+  item.className = "extra-item";
+
+  // posiciones aleatorias
+  item.style.left = `${Math.random() * 75}%`;
+  item.style.top = `${Math.random() * 75}%`;
+
+  const imgEl = document.createElement("img");
+  imgEl.src = imagen;
+  imgEl.className = "extra-img";
+
+  // clic → nueva página
+  item.addEventListener("click", () => {
+    window.location.href = link;
+  });
+
+  item.appendChild(imgEl);
+  container.appendChild(item);
+}
+
+// Corazón
+crearExtra("corazon", "img/corazon.jpg", "corazon.html");
+
+// Ave
+crearExtra("ave", "img/ave.gif", "ave.html");
+
 
 item.addEventListener("click", () => {
   const collageInterno = img.fotos
