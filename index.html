@@ -16,7 +16,11 @@
   <div id="inicio-interaccion" class="overlay-inicio">
     Toca o haz scroll para iniciar
   </div>
-
+<script>
+document.getElementById("inicio-interaccion").addEventListener("click", () => {
+  document.getElementById("inicio-interaccion").style.pointerEvents = "none";
+});
+</script>
   <!-- Fondo animado (GIF) -->
   <div class="gif-fondo"></div>
 
