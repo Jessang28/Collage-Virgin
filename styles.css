@@ -62,7 +62,7 @@ body {
 }
 
 .collage-item img {
-  width: 200px;
+  width: 320px;   /* virgenes más grandes */
   height: auto;
   transition: transform 0.3s ease;
 }
