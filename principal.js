@@ -158,14 +158,21 @@ imagenes.forEach(img => {
   item.appendChild(imagenElement);
   item.appendChild(nombre);
 
-  item.addEventListener("click", () => {
-    const collageInterno = img.fotos
-      .map(f => `<img src="${f}" class="foto-interna">`)
-      .join("");
+ item.addEventListener("click", () => {
 
-    textoDescripcion.innerHTML = `<div class="collage-interno">${collageInterno}</div>`;
-    descripcionDiv.style.display = "flex";
-  });
+  const descripcionHTML = `
+    <p class="texto-descripcion">${img.descripcion}</p>
+    <p class="oracion">${img.oracion}</p>
+
+    <div class="collage-interno-pantalla">
+      ${img.fotos.map(f => `<img src="${f}" class="foto-interna-pantalla">`).join("")}
+    </div>
+  `;
+
+  textoDescripcion.innerHTML = descripcionHTML;
+  descripcionDiv.style.display = "flex";
+});
+
 
   container.appendChild(item);
 });
