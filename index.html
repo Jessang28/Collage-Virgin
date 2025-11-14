@@ -4,37 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Collage de Vírgenes</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- decorative font for the button -->
+
+  <!-- Fuente para botón -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Overlay to require first interaction -->
-  <div id="inicio-interaccion" class="inicio-overlay">Toca o haz scroll para iniciar</div>
+  <!-- Overlay para activar audio -->
+  <div id="inicio-interaccion" class="overlay-inicio">
+    Toca o haz scroll para iniciar
+  </div>
 
-  <!-- Background audio controlled by JS -->
-  <audio id="audio-fondo" preload="auto"></audio>
+  <!-- Fondo animado (GIF) -->
+  <div class="gif-fondo"></div>
 
-  <!-- Video (falls back to CSS background if missing) -->
+  <!-- Video de fondo -->
   <video class="video-fondo" autoplay loop muted playsinline>
-    <source src="img/video1.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
+    <source src="video/fondo 1.gif" type="video/mp4">
   </video>
 
-  <!-- Main collage container -->
-  <div id="collage" class="collage-container" aria-live="polite"></div>
+  <!-- Audio de fondo -->
+  <audio id="audio-fondo" preload="auto" loop></audio>
 
-  <!-- Description / gallery modal -->
-  <div id="descripcion" class="descripcion" aria-hidden="true">
-    <button id="btn-volver" class="boton-volver" onclick="cerrarDescripcion()">⬅ Volver</button>
-    <div id="descripcion-inner" class="descripcion-inner">
-      <!-- injected gallery + comment controls -->
-    </div>
+  <!-- Contenedor principal del collage -->
+  <div class="contenedor-collage" id="collage"></div>
+
+  <!-- Descripción al abrir una virgen -->
+  <div id="descripcion" class="descripcion">
+    <button class="boton-volver" onclick="cerrarDescripcion()">Volver</button>
+    <div class="descripcion-texto" id="texto-descripcion"></div>
   </div>
 
   <script src="principal.js"></script>
 </body>
 </html>
+
 
 
