@@ -229,11 +229,8 @@ function crearExtraElementoSiNoExiste(id, imagenSrc, linkDestino, anchoPx = 420)
   });
   container.appendChild(wrapper);
 }
-
-// fallback (por seguridad)
-crearExtraElementoSiNoExiste('corazon', 'img/corazon.png', 'corazon.html', 420);
-crearExtraElementoSiNoExiste('ave', 'img/ave.gif', 'ave.html', 420);
-
+posicionarExtraPorId('corazon', 420);
+posicionarExtraPorId('ave', 420);
 // -----------------------------------------------------------
 // AUDIO aleatorio
 // -----------------------------------------------------------
