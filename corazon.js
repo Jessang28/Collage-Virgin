@@ -44,28 +44,40 @@ setInterval(moverVideo2, 800);
 // -------------------------------
 function iniciarSecuencia() {
 
-  // VIDEO 1 (elfinal1) SONANDO NORMAL
+  // VIDEO 1 (elfinal1)
   v1.currentTime = 0;
-  v1.play().catch(err => console.warn("Error en v1:", err));
+  v1.play().then(() => {
+    console.log("v1 está reproduciendo.");
+  }).catch(err => {
+    console.error("Fallo en v1:", err);
+  });
 
-  // VIDEO 2 (elfinal2) aparece 25s después
+  // VIDEO 2 después de 25s
   setTimeout(() => {
     moverVideo2();
     v2.currentTime = 0;
-    v2.play().catch(err => console.warn("Error en v2:", err));
+    v2.play().then(() => {
+      console.log("v2 está reproduciendo.");
+    }).catch(err => {
+      console.error("Fallo en v2:", err);
+    });
   }, 25000);
 
-  // CUANDO TERMINA VIDEO 1
+  // Cuando termina v1
   v1.onended = () => {
 
-    // CUANDO TERMINA VIDEO 2
+    // Cuando termina v2
     v2.onended = () => {
 
-      // VIDEO 3 (elfinal3) INICIA SOLO
+      // VIDEO 3
       v3.currentTime = 0;
-      v3.play().catch(err => console.warn("Error en v3:", err));
+      v3.play().then(() => {
+        console.log("v3 está reproduciendo.");
+      }).catch(err => {
+        console.error("Fallo en v3:", err);
+      });
 
-      // LOOP COMPLETO
+      // Loop
       v3.onended = () => {
         iniciarSecuencia();
       };
