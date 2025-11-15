@@ -2,9 +2,29 @@
 const gif = document.getElementById("gif-corazon");
 const contVideos = document.getElementById("contenedor-videos");
 
-const v1 = document.getElementById("video1");
-const v2 = document.getElementById("video2");
-const v3 = document.getElementById("video3");
+// Tus videos reales: elfinal1, elfinal2, elfinal3
+const v1 = document.getElementById("video1"); // elfinal1.mp4
+const v2 = document.getElementById("video2"); // elfinal2.mp4
+const v3 = document.getElementById("video3"); // elfinal3.mp4
+
+
+// -------------------------------------------
+// Activación por clic o scroll (permite audio)
+// -------------------------------------------
+function activarReproduccion() {
+  gif.style.display = "none";
+  contVideos.style.display = "block";
+
+  iniciarSecuencia();
+
+  // remover para que no se duplique la acción
+  window.removeEventListener("click", activarReproduccion);
+  window.removeEventListener("scroll", activarReproduccion);
+}
+
+window.addEventListener("click", activarReproduccion);
+window.addEventListener("scroll", activarReproduccion);
+
 
 // -------------------------------
 // Movimiento aleatorio del video2
@@ -19,73 +39,34 @@ function moverVideo2() {
 setInterval(moverVideo2, 800);
 
 
-
 // -------------------------------
-// Al hacer clic en el corazón (evento válido para permitir audio)
-// -------------------------------
-gif.addEventListener("click", () => {
-  gif.style.display = "none";
-  contVideos.style.display = "block";
-
-  // Aseguramos que el video 1 haya cargado
-  if (v1.readyState >= 2) {
-    iniciarSecuencia();
-  } else {
-    v1.addEventListener("loadedmetadata", iniciarSecuencia);
-  }
-});
-
-
-// -------------------------------
-// Secuencia de reproducción
+// SECUENCIA PRINCIPAL
 // -------------------------------
 function iniciarSecuencia() {
 
-  // ---------------------
-  // VIDEO 1 EN REVERSA
-  // ---------------------
-  v1.pause();
-  v1.playbackRate = -1;
+  // VIDEO 1 (elfinal1) SONANDO NORMAL
+  v1.currentTime = 0;
+  v1.play().catch(err => console.warn("Error en v1:", err));
 
-  // MUY importante: solo funciona si ya tiene duración
-  v1.currentTime = v1.duration;
-
-  v1.play().catch(err => {
-    console.warn("Error reproduciendo video 1:", err);
-  });
-
-
-  // ---------------------
-  // VIDEO 2 después de 25s
-  // ---------------------
+  // VIDEO 2 (elfinal2) aparece 25s después
   setTimeout(() => {
     moverVideo2();
-    v2.play().catch(err => {
-      console.warn("Error reproduciendo video 2:", err);
-    });
+    v2.currentTime = 0;
+    v2.play().catch(err => console.warn("Error en v2:", err));
   }, 25000);
 
-
-  // ---------------------
-  // CUANDO TERMINE VIDEO 1
-  // ---------------------
+  // CUANDO TERMINA VIDEO 1
   v1.onended = () => {
 
-    // CUANDO TERMINE VIDEO 2
+    // CUANDO TERMINA VIDEO 2
     v2.onended = () => {
 
-      // VIDEO 3 A PANTALLA COMPLETA
-      v3.play().catch(err => {
-        console.warn("Error reproduciendo video 3:", err);
-      });
+      // VIDEO 3 (elfinal3) INICIA SOLO
+      v3.currentTime = 0;
+      v3.play().catch(err => console.warn("Error en v3:", err));
 
-      // CUANDO ACABA VIDEO 3 → LOOP TOTAL
+      // LOOP COMPLETO
       v3.onended = () => {
-        // Reiniciar tiempos
-        v1.currentTime = v1.duration; // reset reversa
-        v2.currentTime = 0;
-        v3.currentTime = 0;
-
         iniciarSecuencia();
       };
     };
