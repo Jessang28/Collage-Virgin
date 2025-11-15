@@ -49,9 +49,6 @@ body {
   display: block;
   z-index: 1;
 }
-
-}
-
 /* Video 2 pequeño, transparente y moviéndose */
 #video2 {
   position: absolute;
