@@ -14,29 +14,40 @@ const v3 = document.getElementById("video3"); // elfinal3.mp4
 function activarReproduccion() {
   gif.style.display = "none";
   contVideos.style.display = "block";
-function precargarVideos(callback) {
-  let cargados = 0;
-  const total = 3;
 
-  function check() {
-    cargados++;
-    if (cargados === total) callback();
+  function precargarVideos(callback) {
+    let cargados = 0;
+    const total = 3;
+
+    function check() {
+      cargados++;
+      if (cargados === total) callback();
+    }
+
+    v1.addEventListener("canplaythrough", check, { once: true });
+    v2.addEventListener("canplaythrough", check, { once: true });
+    v3.addEventListener("canplaythrough", check, { once: true });
+
+    // *** FIX AQUÍ MISMA, MI AMOR ***
+    v1.addEventListener("loadeddata", () => {
+      v1.currentTime = 0.001;
+    });
+
+    v1.addEventListener("canplay", () => {
+      v1.pause();
+      v1.currentTime = 0.001;
+    });
+    // *** FIN DEL FIX ***
+
+    v1.load();
+    v2.load();
+    v3.load();
   }
 
-  v1.addEventListener("canplaythrough", check, { once: true });
-  v2.addEventListener("canplaythrough", check, { once: true });
-  v3.addEventListener("canplaythrough", check, { once: true });
+  precargarVideos(() => {
+    iniciarSecuencia();
+  });
 
-  v1.load();
-  v2.load();
-  v3.load();
-}
-precargarVideos(() => {
-  iniciarSecuencia();
-});
-
-
-  // remover para que no se duplique la acción
   window.removeEventListener("click", activarReproduccion);
   window.removeEventListener("scroll", activarReproduccion);
 }
@@ -63,7 +74,6 @@ setInterval(moverVideo2, 800);
 // -------------------------------
 function iniciarSecuencia() {
 
-  // VIDEO 1 (elfinal1)
   v1.currentTime = 0;
   v1.play().then(() => {
     console.log("v1 está reproduciendo.");
@@ -71,7 +81,6 @@ function iniciarSecuencia() {
     console.error("Fallo en v1:", err);
   });
 
-  // VIDEO 2 después de 25s
   setTimeout(() => {
     moverVideo2();
     v2.currentTime = 0;
@@ -82,13 +91,9 @@ function iniciarSecuencia() {
     });
   }, 25000);
 
-  // Cuando termina v1
   v1.onended = () => {
-
-    // Cuando termina v2
     v2.onended = () => {
 
-      // VIDEO 3
       v3.currentTime = 0;
       v3.play().then(() => {
         console.log("v3 está reproduciendo.");
@@ -96,7 +101,6 @@ function iniciarSecuencia() {
         console.error("Fallo en v3:", err);
       });
 
-      // Loop
       v3.onended = () => {
         iniciarSecuencia();
       };
