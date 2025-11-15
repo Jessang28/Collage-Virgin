@@ -36,7 +36,6 @@ body {
   background: black;
   overflow: hidden;
 }
-
 /* Video 1 y 3 pantalla completa */
 #video1,
 #video3 {
@@ -56,5 +55,7 @@ body {
   height: auto;
   opacity: 0.6;
   mix-blend-mode: screen;
-  pointer-events: none; /* no bloquea otros videos */
+  pointer-events: none;
+  z-index: 2;
 }
+
