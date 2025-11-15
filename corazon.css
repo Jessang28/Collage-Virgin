@@ -37,7 +37,10 @@ body {
   overflow: hidden;
 }
 /* Video 1 y 3 pantalla completa */
-#video1,
+#video1 {
+  background: black; /* evita pantalla blanca */
+  z-index: 1;
+}
 #video3 {
   position: absolute;
   top: 0;
