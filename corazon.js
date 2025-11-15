@@ -14,8 +14,27 @@ const v3 = document.getElementById("video3"); // elfinal3.mp4
 function activarReproduccion() {
   gif.style.display = "none";
   contVideos.style.display = "block";
+function precargarVideos(callback) {
+  let cargados = 0;
+  const total = 3;
 
+  function check() {
+    cargados++;
+    if (cargados === total) callback();
+  }
+
+  v1.addEventListener("canplaythrough", check, { once: true });
+  v2.addEventListener("canplaythrough", check, { once: true });
+  v3.addEventListener("canplaythrough", check, { once: true });
+
+  v1.load();
+  v2.load();
+  v3.load();
+}
+precargarVideos(() => {
   iniciarSecuencia();
+});
+
 
   // remover para que no se duplique la acción
   window.removeEventListener("click", activarReproduccion);
